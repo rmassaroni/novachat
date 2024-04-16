@@ -14,13 +14,28 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    socket.join('new room');
+    console.log(socket.rooms);
+    //socket.emit(socket.rooms);
+    //io.emit('hello');
+    socket.on('global message', (msg) => {
+        console.log('global message: ' + msg)
+        io.emit('global message', msg)
+    });
+
+    
+
     socket.on('chat message', (msg) => {
-        console.log('message: ' + msg)
+        console.log('message: ' + msg);
         io.emit('chat message', msg);
     });
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
+
+    socket.emit('chat message', 'chat message')
+    socket.emit('global message', 'global message');
+
 });
 
 server.listen(3000, () => {
