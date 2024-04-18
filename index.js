@@ -7,14 +7,28 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
+let channels = [];
+
 app.get('/', (req, res) => {
     //res.send('<h1>Hello world</h1>');
     res.sendFile(join(__dirname, 'index.html'));
 });
 
 io.on('connection', (socket) => {
+    function newChannel(roomName) {
+        for(room in socket.rooms) {
+            console.log(room);
+            if(channels.includes(room) == false) {
+                channels.push(room);
+            }
+        }
+        if(channels.includes(roomName) == false) {
+            channels.push(roomName);
+        }
+        socket.join(roomName);
+    };
     console.log('a user connected');
-    socket.join(wifiName)
+    newChannel(wifiName);
     //socket.join('new room');
     //console.log(socket.rooms);
     //socket.emit(socket.rooms);
@@ -37,9 +51,9 @@ io.on('connection', (socket) => {
     socket.emit('chat message', 'chat message')
 
     socket.emit('global message', 'Welcome. Connected to: ' + wifiName);
-    socket.emit('global message', socket.rooms[0] + '');
+    console.log(channels)
     console.log(socket.rooms);
-    console.log(io.sockets.adapter.rooms);
+    //console.log(io.sockets.adapter.rooms);
 
 });
 
