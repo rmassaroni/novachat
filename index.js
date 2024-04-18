@@ -34,7 +34,6 @@ io.on('connection', (socket) => {
     });
 
     socket.emit('chat message', 'chat message')
-    socket.emit('global message', 'global message');
 
     socket.emit('global message', 'welcome');
     socket.emit('global message', 'Connected to: ' + wifiName);
