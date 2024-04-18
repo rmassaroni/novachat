@@ -11,13 +11,17 @@
         #input:focus { outline: none; }
         #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
 
+        #global_messages { list-style-type: none; margin: 0; padding: 0; }
+        #global_messages > li { padding: 0.5rem 1rem; }
+        #global_messages > li:nth-child(odd) { background: #efefef; }
+
         #messages { list-style-type: none; margin: 0; padding: 0; }
         #messages > li { padding: 0.5rem 1rem; }
         #messages > li:nth-child(odd) { background: #efefef; }
         </style>
     </head>
     <body>
-        <ul id="global messages"></ul>
+        <ul id="global_messages"></ul>
         <ul id="messages"></ul>
         <form id="form" action="">
             <input id="input" autocomplete="off" /><button>Send</button>
@@ -28,8 +32,7 @@
         const form = document.getElementById('form');
         const input = document.getElementById('input');
         const messages = document.getElementById('messages');
-        const gMessages = document.getElementById('global messages')
-        const rooms = document.getElementById('rooms');
+        const gMessages = document.getElementById('global_messages')
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
