@@ -14,7 +14,8 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.join('new room');
+    socket.join(wifiName)
+    //socket.join('new room');
     //console.log(socket.rooms);
     //socket.emit(socket.rooms);
     //io.emit('hello');
@@ -36,6 +37,10 @@ io.on('connection', (socket) => {
     socket.emit('chat message', 'chat message')
 
     socket.emit('global message', 'Welcome. Connected to: ' + wifiName);
+    socket.emit('global message', socket.rooms[0] + '');
+    console.log(socket.rooms);
+    console.log(io.sockets.adapter.rooms);
+
 });
 
 //wifi info
@@ -55,7 +60,7 @@ server.listen(3000, () => {
             console.error(`stderr: ${stderr}`);
             return;
         }
-        console.log(`Wi-Fi name: ${stdout}`);
+        //console.log(`Wi-Fi name: ${stdout}`);
         wifiName = stdout.trim();
     });
 });
