@@ -35,9 +35,7 @@ io.on('connection', (socket) => {
 
     socket.emit('chat message', 'chat message')
 
-    socket.emit('global message', 'welcome');
-    socket.emit('global message', 'Connected to: ' + wifiName);
-
+    socket.emit('global message', 'Welcome. Connected to: ' + wifiName);
 });
 
 //wifi info
@@ -59,6 +57,5 @@ server.listen(3000, () => {
         }
         console.log(`Wi-Fi name: ${stdout}`);
         wifiName = stdout.trim();
-        //socket.emit('global message', wifiName);
     });
 });
