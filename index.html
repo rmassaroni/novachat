@@ -60,6 +60,19 @@
             gMessages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
         });
+
+        socket.on('server message', (msg) => {
+            const item = document.createElement('li');
+            item.textContent = msg;
+            gMessages.appendChild(item); //eventually will have its own message list in red
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+        socket.on('wifi message', (msg) = {
+            const item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
         </script>
     </body>
 </html>

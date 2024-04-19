@@ -34,11 +34,14 @@ io.on('connection', (socket) => {
     //socket.emit(socket.rooms);
     //io.emit('hello');
     socket.on('global message', (msg) => {
-        console.log('global message: ' + msg)
+        console.log('global message: ' + msg);
         io.emit('global message', msg)
     });
 
-    
+    socket.on('server message', (msg) => {
+        console.log('server message: ' + msg);
+        io.emit('server message', msg);
+    })
 
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
@@ -46,11 +49,12 @@ io.on('connection', (socket) => {
     });
     socket.on('disconnect', () => {
         console.log('user disconnected');
+        //delete room if zero users are connected
     });
 
     socket.emit('chat message', 'chat message')
 
-    socket.emit('global message', 'Welcome. Connected to: ' + wifiName);
+    socket.emit('server message', 'Welcome. Connected to: ' + wifiName);
     console.log(channels)
     console.log(socket.rooms);
     //console.log(io.sockets.adapter.rooms);
