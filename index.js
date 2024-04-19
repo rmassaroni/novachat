@@ -41,7 +41,11 @@ io.on('connection', (socket) => {
     socket.on('server message', (msg) => {
         console.log('server message: ' + msg);
         io.emit('server message', msg);
-    })
+    });
+    socket.on('wifi message', (msg) => {
+        console.log('wifi message: ' + msg);
+        io.emit('wifi message', msg);
+    });
 
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
