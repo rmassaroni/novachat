@@ -44,7 +44,7 @@
   overflow-x: scroll;
   scroll-behavior: smooth; /* Optional: adds smooth scrolling */
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
 }
 
 .page {
@@ -56,7 +56,8 @@
     align-items: left;
     justify-content: flex-start;
     font-size: 20;
-  height: 100vh;
+  height: 49vh;
+    max-width:99vw;
 }
 
 .input-class {
@@ -91,10 +92,13 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    li {
-        padding: 0.5rem 1rem;
-    };
-    li:nth-child(odd) {
-        background: #efefef;
-    };
+    max-width: 95vw;
 }
+.messages li {
+    padding: 0.5rem 1rem;
+    max-width:95vw;
+}
+.messages li:nth-child(odd) {
+    background: #efefef;
+}
+

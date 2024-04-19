@@ -48,8 +48,8 @@ function App() {
                 <div className="page">
                     <h1>WiFi Channel: </h1>
                     <ul class="messages">
-                        test message
-                        test message 2
+                        <li>test</li>
+                        <li>test2</li>
                     </ul>
                 </div>
                 <div className="page">Chatroom</div>
