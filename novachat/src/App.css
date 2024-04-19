@@ -15,12 +15,12 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: flex-start;
+  font-size: calc(5px + 2vmin);
   color: white;
 }
 
@@ -35,4 +35,36 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-behavior: smooth; /* Optional: adds smooth scrolling */
+  width: 100vw;
+  height: 100vh;
+}
+
+.page {
+  flex: 0 0 100vw; /* Each page takes the full viewport width */
+  height: 100vh;
+}
+
+.input-class {
+    width: 1200px;
+    border-radius: 10px; /* Adjust the value to change the level of rounding */
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.line {
+    display: flex;
+}
+
+.divider {
+  flex-shrink: 0;
+  width: 0px;
+  background-color: black;
+  margin: 0 10px; /* Adjust the margin to control the space between elements */
 }
