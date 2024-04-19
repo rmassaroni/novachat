@@ -22,6 +22,7 @@
   justify-content: flex-start;
   font-size: calc(5px + 2vmin);
   color: white;
+    gap: 0px;
 }
 
 .App-link {
@@ -48,6 +49,13 @@
 
 .page {
   flex: 0 0 100vw; /* Each page takes the full viewport width */
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-top: 0px;
+    align-items: left;
+    justify-content: flex-start;
+    font-size: 20;
   height: 100vh;
 }
 
@@ -66,5 +74,27 @@
   flex-shrink: 0;
   width: 0px;
   background-color: black;
-  margin: 0 10px; /* Adjust the margin to control the space between elements */
+  margin: 0 7px; /* Adjust the margin to control the space between elements */
+}
+
+.small-padding {
+    font-size:50px;
+    margin-top: 3px;
+    margin-bottom: 7px;
+}
+
+.server-message {
+    font-size: 25px;
+}
+
+.messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        padding: 0.5rem 1rem;
+    };
+    li:nth-child(odd) {
+        background: #efefef;
+    };
 }

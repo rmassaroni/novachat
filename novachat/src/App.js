@@ -34,9 +34,9 @@ function App() {
                     Learn React
                 </a>
                 */}
-                    <h1>novachat</h1>
+                    <h1 class="small-padding">novachat</h1>
                     <div className="line">
-                        <p1>Server Messages: </p1>
+                        <p1 class="server-message">Server Messages: </p1>
                         <div class="divider"></div>
                         <input type="text" className="input-class" />
                     </div>
@@ -45,9 +45,15 @@ function App() {
             </div>
             <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
 
-                <div className="page">Page 1</div>
-                <div className="page">Page 2</div>
-                <div className="page">Page 3</div>
+                <div className="page">
+                    <h1>WiFi Channel: </h1>
+                    <ul class="messages">
+                        test message
+                        test message 2
+                    </ul>
+                </div>
+                <div className="page">Chatroom</div>
+                <div className="page">Global Channel</div>
             </div>
         </div>
     );
