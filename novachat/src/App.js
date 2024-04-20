@@ -1,9 +1,24 @@
 import logo from './logo.svg';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './App.css';
 import io from 'socket.io-client';
 
 function App() {
+    const socketRef = useRef();
+    useEffect(() => {
+        socketRef.current = io('http://localhost:3000');
+        socketRef.current.on('message', (msg) => {
+            console.log('Received message:', msg);
+        });
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, []);
+    const handleSendMessage = () => {
+        socketRef.current.emit('message', 'Hello from client');
+    };
+
+
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
         const container = containerRef.current;
