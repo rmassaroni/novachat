@@ -4,7 +4,7 @@ import './App.css';
 import io from 'socket.io-client';
 
 function App() {
-    /*
+    
     const socketRef = useRef();
     useEffect(() => {
         socketRef.current = io('http://localhost:3000');
@@ -31,11 +31,35 @@ function App() {
             socketRef.current.emit('message', "test");
             setNewMessage("");
         }
-        console.log('message')
+        console.log('message');
     };
-    */
+    
 
-    const socket = io('http://localhost:3000');
+
+    const send = () => {
+        if (newMessage.trim() !== "") {
+            socketRef.current.emit('message', newMessage); // Emit the new message
+            setNewMessage(""); // Clear the input field
+        }
+        else {
+            socketRef.current.emit('message', "test");
+            setNewMessage("");
+        }
+        console.log('message');
+
+    }
+    //const socket = io('http://localhost:3000');
+/*
+    const form = document.getElementByClass('form');
+    const input = document.getElementByClass('input');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value) {
+            socket.emit('message', input.value);
+            input.value = '';
+        }
+    });
+*/
 
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
@@ -72,31 +96,33 @@ function App() {
                     <div className="line">
                         <p1 class="server-message">Server Messages: </p1>
                         <div class="divider"></div>
-                        {/*
                         <input 
                             type="text" 
                             className="input-class" 
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)} 
                         />
-                        */}
                     </div>
                 </header>
 
             </div>
-            {/*
-            <button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
+
             <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
                 <div className="page">
                     <h1>WiFi Channel: </h1>
                     <ul class="messages">
                         <li>test</li>
                         <li>test2</li>
-                        {/* }{messages.map((msg, index) => (
-                                <li key={index}>{msg}</li> // Render each message in the list
-                            ))}
-                        */}
+                        {messages.map((msg, index) => (
+                            <li key={index}>{msg}</li> // Render each message in the list
+                        ))}
+
                     </ul>
+                    {/*<button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
+                    <div class="form" action="">
+                        <input class="input" autocomplete="off" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} 
+/><button onClick={send}>Send</button>
+                    </div>
+
+
                 </div>
                 <div className="page">
                     <h1>Chatroom Example</h1>
