@@ -2,6 +2,12 @@ import logo from './logo.svg';
 import React, { useRef } from 'react';
 import './App.css';
 
+//following imports are from original index.js
+const express = require('express');
+const { createServer } = require('node:http');
+const { join } = require('node:path')
+const { Server } = require('socket.io');
+
 function App() {
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
