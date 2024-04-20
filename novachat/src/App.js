@@ -6,7 +6,10 @@ import io from 'socket.io-client';
 function App() {
     const socketRef = useRef();
     useEffect(() => {
-        socketRef.current = io('http://localhost:3001');
+        socketRef.current = io('http://localhost:3000');
+        socketRef.current.on('connect', () => {
+            console.log('Connected to server');
+        });
         socketRef.current.on('message', (msg) => {
             console.log('Received message:', msg);
 
@@ -16,10 +19,6 @@ function App() {
             socketRef.current.disconnect();
         };
     }, []);
-    //const handleSendMessage = () => {
-    //    socketRef.current.emit('message', 'Hello from client');
-    //};
-
     const [messages, setMessages] = useState([]); // State to hold messages
     const [newMessage, setNewMessage] = useState(""); // State to hold new message>
     const handleSendMessage = () => {
@@ -31,6 +30,7 @@ function App() {
             socketRef.current.emit('message', "test");
             setNewMessage("");
         }
+        console.log('message')
     };
 
 
@@ -88,11 +88,9 @@ function App() {
                     <ul class="messages">
                         <li>test</li>
                         <li>test2</li>
-                        <li>
                             {messages.map((msg, index) => (
                                 <li key={index}>{msg}</li> // Render each message in the list
                             ))}
-                        </li>
                     </ul>
                 </div>
                 <div className="page">

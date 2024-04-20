@@ -13,6 +13,7 @@ const io = new Server(server);
     //res.send('<h1>Hello world</h1>');
     //res.sendFile(join(__dirname, 'index.html'));
 //});
+app.use(express.static(join(__dirname, 'build')));
 io.on('connection', (socket) => {
     console.log("user connected");
     socket.on('message', (msg) => {
@@ -21,12 +22,15 @@ io.on('connection', (socket) => {
     });
     socket.emit('message', 'test');
 });
-app.use(express.static(join(__dirname, 'public')));
+//app.use(express.static(join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'public', 'index.html'));
 });
-server.listen(3001, () => {
-    console.log('server running at http://localhost:3001');
+app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, 'build', 'index.html'));
+});
+server.listen(3000, () => {
+    console.log('server running at http://localhost:3000');
 });
 
 module.exports = server;
