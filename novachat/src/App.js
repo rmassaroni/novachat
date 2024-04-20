@@ -22,19 +22,6 @@ function App() {
     }, []);
     const [messages, setMessages] = useState([]); // State to hold messages
     const [newMessage, setNewMessage] = useState(""); // State to hold new message>
-    const handleSendMessage = () => {
-        if (newMessage.trim() !== "") {
-            socketRef.current.emit('message', newMessage); // Emit the new message
-            setNewMessage(""); // Clear the input field
-        }
-        else {
-            socketRef.current.emit('message', "test");
-            setNewMessage("");
-        }
-        console.log('message');
-    };
-    
-
 
     const send = () => {
         if (newMessage.trim() !== "") {
@@ -49,17 +36,6 @@ function App() {
 
     }
     //const socket = io('http://localhost:3000');
-/*
-    const form = document.getElementByClass('form');
-    const input = document.getElementByClass('input');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (input.value) {
-            socket.emit('message', input.value);
-            input.value = '';
-        }
-    });
-*/
 
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
