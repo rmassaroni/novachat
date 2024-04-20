@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import io from 'socket.io-client';
 
@@ -9,13 +9,28 @@ function App() {
         socketRef.current = io('http://localhost:3001');
         socketRef.current.on('message', (msg) => {
             console.log('Received message:', msg);
+
+            setMessages(prevMessages => [...prevMessages, msg]);
         });
         return () => {
             socketRef.current.disconnect();
         };
     }, []);
+    //const handleSendMessage = () => {
+    //    socketRef.current.emit('message', 'Hello from client');
+    //};
+
+    const [messages, setMessages] = useState([]); // State to hold messages
+    const [newMessage, setNewMessage] = useState(""); // State to hold new message>
     const handleSendMessage = () => {
-        socketRef.current.emit('message', 'Hello from client');
+        if (newMessage.trim() !== "") {
+            socketRef.current.emit('message', newMessage); // Emit the new message
+            setNewMessage(""); // Clear the input field
+        }
+        else {
+            socketRef.current.emit('message', "test");
+            setNewMessage("");
+        }
     };
 
 
@@ -54,11 +69,18 @@ function App() {
                     <div className="line">
                         <p1 class="server-message">Server Messages: </p1>
                         <div class="divider"></div>
-                        <input type="text" className="input-class" />
+                        <input 
+                            type="text" 
+                            className="input-class" 
+                            value={newMessage} 
+                            onChange={(e) => setNewMessage(e.target.value)} 
+                        />
                     </div>
                 </header>
 
             </div>
+
+            <button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
             <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
 
                 <div className="page">
@@ -66,6 +88,11 @@ function App() {
                     <ul class="messages">
                         <li>test</li>
                         <li>test2</li>
+                        <li>
+                            {messages.map((msg, index) => (
+                                <li key={index}>{msg}</li> // Render each message in the list
+                            ))}
+                        </li>
                     </ul>
                 </div>
                 <div className="page">
