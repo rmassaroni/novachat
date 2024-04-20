@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 function App() {
     const socketRef = useRef();
     useEffect(() => {
-        socketRef.current = io('http://localhost:3000');
+        socketRef.current = io('http://localhost:3001');
         socketRef.current.on('message', (msg) => {
             console.log('Received message:', msg);
         });
