@@ -47,6 +47,10 @@
   height: 85vh;
 }
 
+.container::-webkit-scrollbar {
+    display: none;
+}
+
 .page {
   flex: 0 0 100vw; /* Each page takes the full viewport width */
     display: flex;

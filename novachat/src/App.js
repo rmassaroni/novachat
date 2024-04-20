@@ -52,8 +52,12 @@ function App() {
                         <li>test2</li>
                     </ul>
                 </div>
-                <div className="page">Chatroom</div>
-                <div className="page">Global Channel</div>
+                <div className="page">
+                    <h1>Chatroom Example</h1>
+                </div>
+                <div className="page">
+                    <h1>Global Channel</h1>
+                </div>
             </div>
         </div>
     );
