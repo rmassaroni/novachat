@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import React, { useRef } from 'react';
 import './App.css';
+import io from 'socket.io-client';
 
 function App() {
     const containerRef = useRef(null);
