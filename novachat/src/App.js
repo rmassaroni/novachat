@@ -4,7 +4,6 @@ import './App.css';
 import io from 'socket.io-client';
 
 function App() {
-    
     const socketRef = useRef();
     useEffect(() => {
         socketRef.current = io('http://localhost:3000');
@@ -20,25 +19,25 @@ function App() {
             socketRef.current.disconnect();
         };
     }, []);
-    const [messages, setMessages] = useState([]); // State to hold messages
-    const [newMessage, setNewMessage] = useState(""); // State to hold new message>
-
+    const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState("");
     const send = () => {
         if (newMessage.trim() !== "") {
-            socketRef.current.emit('message', newMessage); // Emit the new message
-            setNewMessage(""); // Clear the input field
+            socketRef.current.emit('message', newMessage);
+            setNewMessage("");
         }
         else {
-            socketRef.current.emit('message', "test");
+            socketRef.current.emit('message', "empty message");
             setNewMessage("");
         }
         console.log('message');
-
     }
     //const socket = io('http://localhost:3000');
 
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
+        if (e.key === "Enter")
+            send();
         const container = containerRef.current;
         if (!container) return;
 
