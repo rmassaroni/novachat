@@ -1,11 +1,12 @@
 //following imports are from original index.js. still figuring out where they should be
 const express = require('express');
-const { createServer } = require('node:http');
+//const { createServer } = require('node:http');
+const http = require('http');
 //const { join } = require('node:path')
 const { join } = require('path');
 const { Server } = require('socket.io');
 const app = express();
-const server = createServer(app);
+const server = http.createServer(app);
 const io = new Server(server);
 
 //socket stuff from original index.js
@@ -22,6 +23,7 @@ io.on('connection', (socket) => {
     });
     socket.emit('message', 'test');
 });
+
 //app.use(express.static(join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'public', 'index.html'));

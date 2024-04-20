@@ -4,6 +4,7 @@ import './App.css';
 import io from 'socket.io-client';
 
 function App() {
+    /*
     const socketRef = useRef();
     useEffect(() => {
         socketRef.current = io('http://localhost:3000');
@@ -32,7 +33,9 @@ function App() {
         }
         console.log('message')
     };
+    */
 
+    const socket = io('http://localhost:3000');
 
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
@@ -69,28 +72,30 @@ function App() {
                     <div className="line">
                         <p1 class="server-message">Server Messages: </p1>
                         <div class="divider"></div>
+                        {/*
                         <input 
                             type="text" 
                             className="input-class" 
-                            value={newMessage} 
+                            value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)} 
                         />
+                        */}
                     </div>
                 </header>
 
             </div>
-
+            {/*
             <button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
             <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
-
                 <div className="page">
                     <h1>WiFi Channel: </h1>
                     <ul class="messages">
                         <li>test</li>
                         <li>test2</li>
-                            {messages.map((msg, index) => (
+                        {/* }{messages.map((msg, index) => (
                                 <li key={index}>{msg}</li> // Render each message in the list
                             ))}
+                        */}
                     </ul>
                 </div>
                 <div className="page">
