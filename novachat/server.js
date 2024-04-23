@@ -32,11 +32,14 @@ io.on('connection', (socket) => {
         console.log('message: ' + msg);
         io.emit('message', msg);
     });
-    socket.on('getWifi', () => {
-        console.log(wifiname);
-        io.emit('wifi', wifiname);
+    socket.on('wifi', (w) => {
+        console.log(w);
+        io.emit('wifi', w);
+        io.emit('message', "joined " + w);
     });
-    socket.emit('message', 'test');
+    socket.emit('message', 'server test');
+    //socket.emit('message', wifiname);
+    socket.emit('wifi', wifiname);
     console.log(channels);
 });
 

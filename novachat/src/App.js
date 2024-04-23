@@ -15,10 +15,11 @@ function App() {
 
             setMessages(prevMessages => [...prevMessages, msg]);
         });
-        socketRef.current.emit('getWifi');
+        //socketRef.current.emit('getWifi');
         socketRef.current.on('wifi', (wifi) => {
+            console.log('Received wifi:', wifi);
             setWifiName(wifi);
-            setWifiHeader(wifiname);
+            //setWifiHeader(wifiname);
         });
         return () => {
             socketRef.current.disconnect();
