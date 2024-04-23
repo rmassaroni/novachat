@@ -9,12 +9,6 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-//socket stuff from original index.js
-//app.get('/', (req, res) => {
-    //res.send('<h1>Hello world</h1>');
-    //res.sendFile(join(__dirname, 'index.html'));
-//});
-
 let channels = [];
 
 app.use(express.static(join(__dirname, 'build')));
