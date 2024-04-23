@@ -3,6 +3,9 @@
 - left/right arrow options instead of j/k
 - frontend branch
 
+> [!NOTE]
+> Ignore code outside of ./novachat. It is from before turning this project into a react project.
+
 ![Alt text](./novachat/public/homepagescreenshot.png)
 
 ## Frontend Contributing Instructions
