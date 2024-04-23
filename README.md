@@ -23,3 +23,4 @@
 - 'npm run build && node server.js' inside of ./novachat/
 - TODO:
   - Fix wifi fetch. works on server side but not client side.
+  - Find a live alternative to 'npm run build' that similarly includes server side.
