@@ -15,6 +15,11 @@ function App() {
 
             setMessages(prevMessages => [...prevMessages, msg]);
         });
+        socketRef.current.emit('getWifi');
+        socketRef.current.on('wifi', (wifi) => {
+            setWifiName(wifi);
+            setWifiHeader(wifiname);
+        });
         return () => {
             socketRef.current.disconnect();
         };
@@ -30,7 +35,6 @@ function App() {
             socketRef.current.emit('message', "empty message");
             setNewMessage("");
         }
-        console.log('message');
     }
     //const socket = io('http://localhost:3000');
 
@@ -49,6 +53,18 @@ function App() {
             container.scrollLeft += scrollAmount;
         }
     };
+
+    const [wifiname, setWifiName] = useState('unknown wifi');
+    const updateWifi = () => {
+        setWifiHeader(wifiname);
+    }
+    //updateWifi();
+    function setWifiHeader(wifi) {
+        var wifiHeader = document.getElementById('wifi-header');
+        wifiHeader.textContent = wifi;
+    };
+
+
     return (
 
         <div>
@@ -82,7 +98,7 @@ function App() {
 
             <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
                 <div className="page">
-                    <h1>WiFi Channel: </h1>
+                    <h1 id="wifi-header">WiFi Channel: </h1>
                     <ul class="messages">
                         <li>test</li>
                         <li>test2</li>
