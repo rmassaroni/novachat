@@ -6,3 +6,5 @@
 
 
 ## Frontend Contributing Instructions
+- npm start inside of ./novachat
+- Edit the JSX code inside the return block of App.js.
