@@ -11,17 +11,15 @@ function App() {
             console.log('Connected to server');
         });
         socketRef.current.on('message', (msg) => {
-            console.log('Received message:', msg);
-
-            setMessages(prevMessages => [...prevMessages, msg]);
+            //setMessages(prevMessages => [...prevMessages, msg]);
+            send(msg);
         });
         socketRef.current.on('server message', (msg) => {
-            setMessages(prevMessages => [...prevMessages, msg]);
+            send(msg);
         });
         socketRef.current.on('wifi', (wifi) => {
             console.log('Received wifi:', wifi);
             setWifiHeader(wifi);
-            //setMessages(prevMessages => [...prevMessages, wifiname]);
         });
         return () => {
             socketRef.current.disconnect();
@@ -29,14 +27,19 @@ function App() {
     }, []);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const send = () => {
-        if (newMessage.trim() !== "") {
-            socketRef.current.emit('message', newMessage);
-            setNewMessage("");
+    const send = (msg = "") => {
+        if(msg != "") {
+            setMessages(prevMessages => [...prevMessages, msg]);
         }
         else {
-            socketRef.current.emit('message', "empty message");
-            setNewMessage("");
+            if (newMessage.trim() !== "") {
+                socketRef.current.emit('message', newMessage);
+                setNewMessage("");
+            }
+            else {
+                socketRef.current.emit('message', "empty message");
+                setNewMessage("");
+            }
         }
     }
     //const socket = io('http://localhost:3000');

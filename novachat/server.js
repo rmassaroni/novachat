@@ -32,6 +32,9 @@ io.on('connection', (socket) => {
         console.log('message: ' + msg);
         io.emit('message', msg);
     });
+    socket.on('server message', (msg) => {
+        io.emit('server message', msg);
+    });
     socket.on('wifi', (w) => {
         console.log(w);
         io.emit('wifi', w);
@@ -39,6 +42,7 @@ io.on('connection', (socket) => {
     });
     socket.emit('message', 'server test');
     socket.emit('message', wifiname);
+    socket.emit('server message', "server message test");
     socket.emit('wifi', wifiname);
     console.log(channels);
 });
