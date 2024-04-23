@@ -6,5 +6,9 @@
 
 
 ## Frontend Contributing Instructions
-- npm start inside of ./novachat
+- 'npm i'?
+- 'npm start' inside of ./novachat/
 - Edit the JSX code inside the return block of App.js.
+
+## Backend Contributing Instructions
+- 'npm run build && node server.js' inside of ./novachat/
