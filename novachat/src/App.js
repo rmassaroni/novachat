@@ -18,8 +18,8 @@ function App() {
         //socketRef.current.emit('getWifi');
         socketRef.current.on('wifi', (wifi) => {
             console.log('Received wifi:', wifi);
-            setWifiName(wifi);
-            //setWifiHeader(wifiname);
+            setWifiHeader(wifi);
+            //setMessages(prevMessages => [...prevMessages, wifiname]);
         });
         return () => {
             socketRef.current.disconnect();
@@ -55,14 +55,10 @@ function App() {
         }
     };
 
-    const [wifiname, setWifiName] = useState('unknown wifi');
-    const updateWifi = () => {
-        setWifiHeader(wifiname);
-    }
-    //updateWifi();
     function setWifiHeader(wifi) {
         var wifiHeader = document.getElementById('wifi-header');
-        wifiHeader.textContent = wifi;
+        wifiHeader.textContent = "WiFi Channel: " + wifi;
+        setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
     };
 
 
