@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import io from 'socket.io-client';
@@ -18,7 +18,6 @@ function App() {
             send(msg);
         });
         socketRef.current.on('wifi', (wifi) => {
-            console.log('Received wifi:', wifi);
             setWifiHeader(wifi);
         });
         return () => {
@@ -42,6 +41,10 @@ function App() {
             }
         }
     }
+    //dan, heres something for you to do.  create red messages.
+    const sendServerMessage(msg) => {
+
+    }
     //const socket = io('http://localhost:3000');
 
     const containerRef = useRef(null);
@@ -63,12 +66,12 @@ function App() {
     function setWifiHeader(wifi) {
         var wifiHeader = document.getElementById('wifi-header');
         wifiHeader.textContent = "WiFi Channel: " + wifi;
-        setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
+        //setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
+        send('Joined:' + wifi);
     };
 
 
     return (
-
         <div>
             <div className="App-header">
                 <header className="App-header">
@@ -112,7 +115,7 @@ function App() {
                     {/*<button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
                     <div class="form" action="">
                         <input class="input" autocomplete="off" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} 
-/><button onClick={send}>Send</button>
+                        /><button onClick={send}>Send</button>
                     </div>
 
 
