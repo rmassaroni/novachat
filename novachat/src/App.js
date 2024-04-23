@@ -15,7 +15,9 @@ function App() {
 
             setMessages(prevMessages => [...prevMessages, msg]);
         });
-        //socketRef.current.emit('getWifi');
+        socketRef.current.on('server message', (msg) => {
+            setMessages(prevMessages => [...prevMessages, msg]);
+        });
         socketRef.current.on('wifi', (wifi) => {
             console.log('Received wifi:', wifi);
             setWifiHeader(wifi);
