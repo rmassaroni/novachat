@@ -5,6 +5,7 @@
 - left/right arrow options instead of j/k. visible arrow buttons on side of screen
 - frontend branch
 
+![Alt text](./novachat/public/homepagescreenshot.png)
 
 ## Frontend Contributing Instructions
 - 'npm i'?
