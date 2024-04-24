@@ -17,7 +17,6 @@ function App() {
             //myUserNumber = num;
             setMyUserNumber(num);
             send('my user num: '+num);
-            socketRef.current.emit('user number', num);
         });
         socketRef.current.on('message', (msg) => {
             //setMessages(prevMessages => [...prevMessages, msg]);

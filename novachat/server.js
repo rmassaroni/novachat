@@ -32,9 +32,6 @@ io.on('connection', (socket) => {
     };
     newChannel(wifiname);
 
-    socket.on('user number', (num) => {
-        //console.log(num);
-    });
     socket.on('message', (msg) => {
         io.emit('message', msg);
     });
