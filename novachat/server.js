@@ -11,11 +11,13 @@ const io = new Server(server);
 
 var channels = [];
 var userNumber = 0;
+var activeUsers = []; //identifies users by numbers for now until we have a proper database.
 
 app.use(express.static(join(__dirname, 'build')));
 io.on('connection', (socket) => {
     console.log("user connected");
     userNumber++;
+    activeUsers.push(userNumber);
     function newChannel(roomName) {
         for(room in socket.rooms) {
             console.log(room);
@@ -30,15 +32,17 @@ io.on('connection', (socket) => {
     };
     newChannel(wifiname);
 
+    socket.on('user number', (num) => {
+        console.log(num);
+        //io.emit('user number', num);
+    });
     socket.on('message', (msg) => {
-        console.log('message: ' + msg);
         io.emit('message', msg);
     });
     socket.on('server message', (msg) => {
         io.emit('server message', msg);
     });
     socket.on('wifi', (w) => {
-        console.log(w);
         io.emit('wifi', w);
         socket.emit('message', w);
     });
@@ -48,12 +52,13 @@ io.on('connection', (socket) => {
         userNumber--;
     });
 
-    socket.emit('message', 'server test');
+    socket.emit('user number', userNumber);
     socket.emit('message', wifiname);
     socket.emit('server message', "server message test");
     socket.emit('wifi', wifiname);
     console.log(channels);
     console.log("User number: ", userNumber);
+    socket.emit('server message', userNumber+" active user(s)");
 });
 
 //app.use(express.static(join(__dirname, 'public')));

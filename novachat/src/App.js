@@ -5,10 +5,15 @@ import io from 'socket.io-client';
 
 function App() {
     const socketRef = useRef();
+    var myUserNumber = -1;
     useEffect(() => {
         socketRef.current = io('http://localhost:3000');
         socketRef.current.on('connect', () => {
             console.log('Connected to server');
+        });
+        socketRef.current.on('user number', (num) => {
+            myUserNumber = num;
+            send('my user num: '+myUserNumber);
         });
         socketRef.current.on('message', (msg) => {
             //setMessages(prevMessages => [...prevMessages, msg]);
@@ -21,6 +26,7 @@ function App() {
             setWifiHeader(wifi);
         });
         return () => {
+            socketRef.current.emit('user number', myUserNumber);
             socketRef.current.disconnect();
         };
     }, []);
