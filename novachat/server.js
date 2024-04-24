@@ -9,11 +9,13 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-let channels = [];
+var channels = [];
+var userNumber = 0;
 
 app.use(express.static(join(__dirname, 'build')));
 io.on('connection', (socket) => {
     console.log("user connected");
+    userNumber++;
     function newChannel(roomName) {
         for(room in socket.rooms) {
             console.log(room);
@@ -45,6 +47,7 @@ io.on('connection', (socket) => {
     socket.emit('server message', "server message test");
     socket.emit('wifi', wifiname);
     console.log(channels);
+    console.log("User number: ", userNumber);
 });
 
 //app.use(express.static(join(__dirname, 'public')));

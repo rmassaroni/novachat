@@ -2,6 +2,7 @@
 - finish migration from index.html to app.js. migrate dependencies to react project
 - left/right arrow options instead of j/k
 - frontend branch
+- send button not working. only 'enter' works
 
 > [!NOTE]
 > Ignore code outside of ./novachat. It is from before turning this project into a react project.
@@ -23,6 +24,7 @@
 
 ## Backend Contributing Instructions
 - 'npm run build && node server.js' inside of ./novachat/
+- You don't need to 'npm run build' if changes were only made to server.js.
 - TODO:
   - Fix wifi fetch. works on server side but not client side.
   - Find a live alternative to 'npm run build' that similarly includes server side.
