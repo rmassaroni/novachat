@@ -14,6 +14,7 @@
 - 'npm start' inside of ./novachat/
 - Edit the JSX code inside the return block of App.js.
 - TODO:
+  - Function to create channel pages programmatically for each element of myChannels.
   - Fix horizontal scrolling to be exact
   - Left panel that shows all available rooms/channels to jumps to.
   - Visible arrow buttons on side of screen for scrolling.
