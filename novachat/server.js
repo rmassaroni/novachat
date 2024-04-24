@@ -42,6 +42,12 @@ io.on('connection', (socket) => {
         io.emit('wifi', w);
         socket.emit('message', w);
     });
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+        //delete room if zero users are connected
+        userNumber--;
+    });
+
     socket.emit('message', 'server test');
     socket.emit('message', wifiname);
     socket.emit('server message', "server message test");
