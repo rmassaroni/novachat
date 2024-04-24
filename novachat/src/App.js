@@ -7,7 +7,11 @@ function App() {
     const socketRef = useRef();
     //var myUserNumber = -1;
     const [myUserNumber, setMyUserNumber] = useState(-1);
-    const [myChannels, setMyChannels] = useState([]);
+    var myChannels = ["Global"];
+    const roomUpdate = (newRoom) => {
+        //myChannels = [...myChannels, newRoom];
+        myChannels.push(newRoom);
+    };
     useEffect(() => {
         socketRef.current = io('http://localhost:3000');
         socketRef.current.on('connect', () => {
@@ -18,8 +22,12 @@ function App() {
             setMyUserNumber(num);
             send('my user num: '+num);
         });
+        socketRef.current.on('join room', (room) => {
+            
+            roomUpdate(room);
+            send("myChannels: "+ myChannels);
+        })
         socketRef.current.on('message', (msg) => {
-            //setMessages(prevMessages => [...prevMessages, msg]);
             send(msg);
         });
         socketRef.current.on('server message', (msg) => {
@@ -27,9 +35,9 @@ function App() {
         });
         socketRef.current.on('wifi', (wifi) => {
             setWifiHeader(wifi);
+            roomUpdate(wifi);
         });
         return () => {
-            socketRef.current.emit('user number', myUserNumber);
             socketRef.current.disconnect();
         };
     }, []);

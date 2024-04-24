@@ -57,6 +57,7 @@ io.on('connection', (socket) => {
     console.log('channels: ', channels);
     console.log('active users: ',activeUsers);
     socket.emit('server message', userNumber+" active user(s)");
+    socket.emit('join room', "test room");
 });
 
 //app.use(express.static(join(__dirname, 'public')));
