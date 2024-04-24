@@ -20,6 +20,7 @@
   - Should we remove server messages?
   - Red server messages
   - Center message boxes
+  - Welcome popup on joining channels. warning on global channel
 
 
 ## Backend Contributing Instructions
