@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
         io.emit('message', msg);
     });
     socket.on('server message', (msg) => {
-        //server messages will only be displayed to individuals
+        //server messages will only be displayed to individuals?
         io.emit('server message', msg);
     });
     socket.on('wifi', (w) => {

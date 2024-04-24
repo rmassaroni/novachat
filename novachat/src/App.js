@@ -122,8 +122,6 @@ function App() {
                 <div className="page">
                     <h1 id="wifi-header">WiFi Channel: </h1>
                     <ul class="messages">
-                        <li>test</li>
-                        <li>test2</li>
                         {messages.map((msg, index) => (
                             <li key={index}>{msg}</li> // Render each message in the list
                         ))}
