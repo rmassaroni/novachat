@@ -5,15 +5,19 @@ import io from 'socket.io-client';
 
 function App() {
     const socketRef = useRef();
-    var myUserNumber = -1;
+    //var myUserNumber = -1;
+    const [myUserNumber, setMyUserNumber] = useState(-1);
+    const [myChannels, setMyChannels] = useState([]);
     useEffect(() => {
         socketRef.current = io('http://localhost:3000');
         socketRef.current.on('connect', () => {
             console.log('Connected to server');
         });
         socketRef.current.on('user number', (num) => {
-            myUserNumber = num;
-            send('my user num: '+myUserNumber);
+            //myUserNumber = num;
+            setMyUserNumber(num);
+            send('my user num: '+num);
+            socketRef.current.emit('user number', num);
         });
         socketRef.current.on('message', (msg) => {
             //setMessages(prevMessages => [...prevMessages, msg]);

@@ -15,9 +15,9 @@ var activeUsers = []; //identifies users by numbers for now until we have a prop
 
 app.use(express.static(join(__dirname, 'build')));
 io.on('connection', (socket) => {
-    console.log("user connected");
+    console.log("user connected: ", socket.id);
+    activeUsers.push(socket.id);
     userNumber++;
-    activeUsers.push(userNumber);
     function newChannel(roomName) {
         for(room in socket.rooms) {
             console.log(room);
@@ -33,13 +33,13 @@ io.on('connection', (socket) => {
     newChannel(wifiname);
 
     socket.on('user number', (num) => {
-        console.log(num);
-        //io.emit('user number', num);
+        //console.log(num);
     });
     socket.on('message', (msg) => {
         io.emit('message', msg);
     });
     socket.on('server message', (msg) => {
+        //server messages will only be displayed to individuals
         io.emit('server message', msg);
     });
     socket.on('wifi', (w) => {
@@ -47,17 +47,18 @@ io.on('connection', (socket) => {
         socket.emit('message', w);
     });
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        console.log('user disconnected: ', socket.id);
         //delete room if zero users are connected
         userNumber--;
+        activeUsers = [...activeUsers.slice(0, activeUsers.indexOf(socket.id)), ...activeUsers.slice(activeUsers.indexOf(socket.id) + 1)];
     });
 
-    socket.emit('user number', userNumber);
+    socket.emit('user number', socket.id);
     socket.emit('message', wifiname);
     socket.emit('server message', "server message test");
     socket.emit('wifi', wifiname);
-    console.log(channels);
-    console.log("User number: ", userNumber);
+    console.log('channels: ', channels);
+    console.log('active users: ',activeUsers);
     socket.emit('server message', userNumber+" active user(s)");
 });
 
