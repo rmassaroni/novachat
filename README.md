@@ -18,6 +18,7 @@
   - Visible arrow buttons on side of screen for scrolling.
   - Should we remove server messages?
   - Red server messages
+  - Center message boxes
 
 
 ## Backend Contributing Instructions

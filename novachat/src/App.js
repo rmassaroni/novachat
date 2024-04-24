@@ -42,7 +42,7 @@ function App() {
         }
     }
     //dan, heres something for you to do.  create red messages.
-    const sendServerMessage(msg) => {
+    const sendServerMessage = (msg) => {
 
     }
     //const socket = io('http://localhost:3000');
@@ -67,7 +67,7 @@ function App() {
         var wifiHeader = document.getElementById('wifi-header');
         wifiHeader.textContent = "WiFi Channel: " + wifi;
         //setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
-        send('Joined:' + wifi);
+        send('Joined: ' + wifi);
     };
 
 
