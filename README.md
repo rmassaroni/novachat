@@ -30,3 +30,12 @@
 - You don't need to 'npm run build' if changes were only made to server.js.
 - TODO:
   - Find a live alternative to 'npm run build' that similarly includes server side.
+
+
+## Tasks if we have extra time
+- login db.
+- convert to ts.
+- connect accounds to github or microsoft for security.
+- encryption.
+
+
