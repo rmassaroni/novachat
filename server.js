@@ -9,27 +9,27 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBDQXvu3uvJJv8RWLrqKEegOp63qaWDJzM",
-  authDomain: "novachat-b6eea.firebaseapp.com",
-  projectId: "novachat-b6eea",
-  storageBucket: "novachat-b6eea.appspot.com",
-  messagingSenderId: "685457111056",
-  appId: "1:685457111056:web:a5d2e5d7dbdb2771417295",
-  measurementId: "G-HNKKYK9MQT"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+//
+// // Your web app's Firebase configuration
+// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBDQXvu3uvJJv8RWLrqKEegOp63qaWDJzM",
+//   authDomain: "novachat-b6eea.firebaseapp.com",
+//   projectId: "novachat-b6eea",
+//   storageBucket: "novachat-b6eea.appspot.com",
+//   messagingSenderId: "685457111056",
+//   appId: "1:685457111056:web:a5d2e5d7dbdb2771417295",
+//   measurementId: "G-HNKKYK9MQT"
+// };
+//
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 
 var channels = [];
 var userNumber = 0;
