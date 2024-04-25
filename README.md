@@ -37,5 +37,7 @@
 - convert to ts.
 - connect accounds to github or microsoft for security.
 - encryption.
-
-
+- ai chatbot channel.
+- command line commands.
+- shared text editor.
+- shared notes/docs.

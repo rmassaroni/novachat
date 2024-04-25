@@ -84,9 +84,7 @@ server.listen(3000, '0.0.0.0', () => {
             console.error(`stderr: ${stderr}`);
             return;
         }
-        //console.log(`Wi-Fi name: ${stdout}`);
         wifiname = stdout.trim();
-
         console.log(wifiname);
     });
 
