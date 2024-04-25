@@ -58,16 +58,20 @@ function App() {
             }
         }
     }
+    const sendChatMessage = (msg) => {
+        send(myUserNumber+": "+msg);
+    }
     //dan, heres something for you to do.  create red messages.
     const sendServerMessage = (msg) => {
 
+        send("Server: "+msg);
     }
     //const socket = io('http://localhost:3000');
 
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
         if (e.key === "Enter")
-            send();
+            sendChatMessage();
         const container = containerRef.current;
         if (!container) return;
 
