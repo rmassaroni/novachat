@@ -7,7 +7,7 @@
 > [!NOTE]
 > Ignore code outside of ./novachat. It is from before turning this project into a react project.
 
-![Alt text](./novachat/public/homepagescreenshot.png)
+![Alt text](./public/homepagescreenshot.png)
 
 ## Frontend Contributing Instructions
 - 'npm i'?
