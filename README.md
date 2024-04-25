@@ -41,3 +41,4 @@
 - command line commands.
 - shared text editor.
 - shared notes/docs.
+- search engine.
