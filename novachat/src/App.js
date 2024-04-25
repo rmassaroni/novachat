@@ -14,24 +14,25 @@ function App() {
     };
     useEffect(() => {
         socketRef.current = io('http://localhost:3000');
+        //socketRef.current = io('http://172.21.70.97:3000'); //for multi user testing
         socketRef.current.on('connect', () => {
             console.log('Connected to server');
         });
         socketRef.current.on('user number', (num) => {
             //myUserNumber = num;
             setMyUserNumber(num);
-            send('my user num: '+num);
+            sendServerMessage('User Number: '+num);
         });
         socketRef.current.on('join room', (room) => {
             
             roomUpdate(room);
-            send("myChannels: "+ myChannels);
+            sendServerMessage("myChannels: "+ myChannels);
         })
         socketRef.current.on('message', (msg) => {
             send(msg);
         });
         socketRef.current.on('server message', (msg) => {
-            send(msg);
+            sendServerMessage(msg);
         });
         socketRef.current.on('wifi', (wifi) => {
             setWifiHeader(wifi);
@@ -58,13 +59,20 @@ function App() {
             }
         }
     }
-    const sendChatMessage = (msg) => {
-        send(myUserNumber+": "+msg);
+    const sendChatMessage = () => {
+        if (newMessage.trim() !== "") {
+            socketRef.current.emit('message', myUserNumber+": "+newMessage);
+            setNewMessage("");
+        }
+        else {
+            socketRef.current.emit('message', myUserNumber+": empty message");
+            setNewMessage("");
+        }
     }
     //dan, heres something for you to do.  create red messages.
     const sendServerMessage = (msg) => {
 
-        send("Server: "+msg);
+        send("SERVER: "+msg);
     }
     //const socket = io('http://localhost:3000');
 
@@ -88,7 +96,6 @@ function App() {
         var wifiHeader = document.getElementById('wifi-header');
         wifiHeader.textContent = "WiFi Channel: " + wifi;
         //setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
-        send('Joined: ' + wifi);
     };
 
 
