@@ -44,7 +44,7 @@ function App() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const send = (msg = "") => {
-        if (msg != "") {
+        if (msg !== "") {
             setMessages((prevMessages) => [...prevMessages, msg]);
         } else {
             if (newMessage.trim() !== "") {
@@ -118,8 +118,8 @@ function App() {
                             autocomplete="off"
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
+                            placeholder="Message"
                         />
-                        <button onClick={send}>Send</button>
                     </div>
                 </div>
                 <div className="page">
