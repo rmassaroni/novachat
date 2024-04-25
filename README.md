@@ -1,22 +1,15 @@
-## TODO
-
-- transparent arrows on left and right of screen to switch pages
-
-> [!NOTE]
-> Ignore code outside of ./novachat. It is from before turning this project into a react project.
-
 ![Alt text](./public/homepagescreenshot.png)
 
 ## Frontend Contributing Instructions
 
-- 'npm i'?
-- 'npm start' inside of ./novachat/
+- 'npm start' inside of ./novachat for live development
 - Edit the JSX code inside the return block of App.js.
 - TODO:
+  - Method to change channels
+    - Priority: Left panel that shows all available rooms/channels to jumps to.
+    - Secondary: transparent arrows on left and right of screen to switch pages
+      - Fix horizontal scrolling to be exact
   - Function to create channel pages programmatically for each element of myChannels.
-  - Fix horizontal scrolling to be exact
-  - Left panel that shows all available rooms/channels to jumps to.
-  - Visible arrow buttons on side of screen for scrolling.
   - Should we remove server messages?
   - Red server messages
   - Center message boxes
