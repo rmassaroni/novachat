@@ -80,6 +80,7 @@ function App() {
         const pageWidth = container.clientWidth;
         const scrollAmount = pageWidth;
         if (e.key === "j") {
+            // use `ArrowLeft` instead of `j` and `ArrowRight` instead of `k` eventually
             container.scrollLeft -= scrollAmount;
         } else if (e.key === "k") {
             container.scrollLeft += scrollAmount;
