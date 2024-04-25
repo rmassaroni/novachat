@@ -22,6 +22,7 @@
   - Red server messages
   - Center message boxes
   - Welcome popup on joining channels. warning on global channel
+  - add 'chatting as: ' somewhere
 
 
 ## Backend Contributing Instructions
