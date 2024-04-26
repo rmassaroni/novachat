@@ -15,6 +15,7 @@
   - Center message boxes
   - Welcome popup on joining channels. warning on global channel
   - add 'chatting as: ' somewhere
+  - add our github links somewhere
 
 ## Backend Contributing Instructions
 
