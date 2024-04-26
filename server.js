@@ -9,33 +9,12 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// // TODO: Add SDKs for Firebase products that you want to use
-// // https://firebase.google.com/docs/web/setup#available-libraries
-//
-// // Your web app's Firebase configuration
-// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBDQXvu3uvJJv8RWLrqKEegOp63qaWDJzM",
-//   authDomain: "novachat-b6eea.firebaseapp.com",
-//   projectId: "novachat-b6eea",
-//   storageBucket: "novachat-b6eea.appspot.com",
-//   messagingSenderId: "685457111056",
-//   appId: "1:685457111056:web:a5d2e5d7dbdb2771417295",
-//   measurementId: "G-HNKKYK9MQT"
-// };
-//
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-
 var channels = [];
 var userNumber = 0;
 var activeUsers = []; //identifies users by numbers for now until we have a proper database.
 
-app.use(express.static(join(__dirname, 'build')));
+ app.use(express.static(join(__dirname, 'build')));
+//app.use(express.static('public'));
 io.on('connection', (socket) => {
     console.log("user connected: ", socket.id);
     activeUsers.push(socket.id);
@@ -94,7 +73,10 @@ let wifiname = "";
 const { exec } = require('child_process');
 const command = 'powershell.exe -Command "Get-NetConnectionProfile | Select-Object -ExpandProperty Name"';
 
-server.listen(3000, '0.0.0.0', () => {
+
+//server.listen(3000, '0.0.0.0', () => {
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
     console.log('server running at http://localhost:3000');
     console.log(server.address);
     exec(command, (error, stdout, stderr) => {

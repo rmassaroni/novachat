@@ -15,6 +15,8 @@ function App() {
     useEffect(() => {
         socketRef.current = io("http://localhost:3000");
         //socketRef.current = io('http://172.21.70.97:3000'); //for multi user testing
+        //socketRef.current = io("https://novachat-b6eea.web.app/");
+
         socketRef.current.on("connect", () => {
             console.log("Connected to server");
         });
