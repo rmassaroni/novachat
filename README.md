@@ -35,3 +35,4 @@
 - shared text editor.
 - shared notes/docs.
 - search engine.
+- games like chess.
