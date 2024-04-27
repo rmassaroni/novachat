@@ -1,7 +1,7 @@
-//import logo from './logo.svg';
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import io from "socket.io-client";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 function App() {
     const socketRef = useRef();
@@ -101,35 +101,42 @@ function App() {
                 <h1 class="small-padding">novachat</h1>
             </div>
 
-            <div
-                className="container"
-                ref={containerRef}
-                tabIndex="0"
-                onKeyDown={handleKeyPress}
-            >
-                <div className="page">
-                    <h1 id="wifi-header">WiFi Channel: </h1>
-                    <ul class="messages">
-                        {messages.map((msg, index) => (
-                            <li key={index}>{msg}</li> // Render each message in the list
-                        ))}
-                    </ul>
-                    {/*<button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
-                    <div class="form" action="">
-                        <input
-                            class="input"
-                            autocomplete="off"
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                            placeholder="Message"
-                        />
+            <div style={{ display: "flex", flexDirection: "row" }}>
+                <Sidebar>
+                    <h3 style={{ paddingLeft: 10 }}>Channels</h3>
+                    <Menu>
+                        {
+                            myChannels.map((channel) => (
+                                <MenuItem>{channel}</MenuItem>
+                            )) // List all the channels
+                        }
+                    </Menu>
+                </Sidebar>
+
+                <div
+                    className="container"
+                    ref={containerRef}
+                    tabIndex="0"
+                    onKeyDown={handleKeyPress}
+                >
+                    <div className="page">
+                        <h1 id="wifi-header">WiFi Channel: </h1>
+                        <ul class="messages">
+                            {messages.map((msg, index) => (
+                                <li key={index}>{msg}</li> // Render each message in the list
+                            ))}
+                        </ul>
+                        {/*<button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
+                        <div class="form" action="">
+                            <input
+                                class="input"
+                                autocomplete="off"
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                placeholder="Message"
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="page">
-                    <h1>Chatroom Example</h1>
-                </div>
-                <div className="page">
-                    <h1>Global Channel</h1>
                 </div>
             </div>
         </div>
