@@ -5,8 +5,9 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 function App() {
     const socketRef = useRef();
-    //var myUserNumber = -1;
-    const [myUserNumber, setMyUserNumber] = useState(-1);
+    const usernames = [];
+    var username1 = "user";
+    const [username, setUsername] = useState(null);
     var myChannels = ["Global"];
     const roomUpdate = (newRoom) => {
         //myChannels = [...myChannels, newRoom];
@@ -19,11 +20,11 @@ function App() {
 
         socketRef.current.on("connect", () => {
             console.log("Connected to server");
-        });
-        socketRef.current.on("user number", (num) => {
-            //myUserNumber = num;
-            setMyUserNumber(num);
-            sendServerMessage("User Number: " + num);
+            var id = Math.floor(Math.random() * 9000) + 1000; // random four digit number
+            setUsername("user" + id); // set a random username
+            username1 += id;
+            usernames.push(username1);
+            sendServerMessage("Username: " + username1);
         });
         socketRef.current.on("join room", (room) => {
             roomUpdate(room);
@@ -52,20 +53,22 @@ function App() {
             if (newMessage.trim() !== "") {
                 socketRef.current.emit("message", newMessage);
                 setNewMessage("");
-            } else {
-                socketRef.current.emit("message", "empty message");
-                setNewMessage("");
             }
+            // } else {
+            //     socketRef.current.emit("message", "empty message");
+            //     setNewMessage("");
+            // }
         }
     };
     const sendChatMessage = () => {
         if (newMessage.trim() !== "") {
-            socketRef.current.emit("message", myUserNumber + ": " + newMessage);
-            setNewMessage("");
-        } else {
-            socketRef.current.emit("message", myUserNumber + ": empty message");
+            socketRef.current.emit("message", username + ": " + newMessage);
             setNewMessage("");
         }
+        // } else {
+        //     socketRef.current.emit("message", username + ": empty message");
+        //     setNewMessage("");
+        // }
     };
     //dan, heres something for you to do.  create red messages.
     const sendServerMessage = (msg) => {
@@ -79,14 +82,15 @@ function App() {
         const container = containerRef.current;
         if (!container) return;
 
-        const pageWidth = container.clientWidth;
-        const scrollAmount = pageWidth;
-        if (e.key === "j") {
-            // use `ArrowLeft` instead of `j` and `ArrowRight` instead of `k` eventually
-            container.scrollLeft -= scrollAmount;
-        } else if (e.key === "k") {
-            container.scrollLeft += scrollAmount;
-        }
+        // NOTE: TEMP REMOVED SCROLLING
+        // const pageWidth = container.clientWidth;
+        // const scrollAmount = pageWidth;
+        // if (e.key === "j") {
+        //     // use `ArrowLeft` instead of `j` and `ArrowRight` instead of `k` eventually
+        //     container.scrollLeft -= scrollAmount;
+        // } else if (e.key === "k") {
+        //     container.scrollLeft += scrollAmount;
+        // }
     };
 
     function setWifiHeader(wifi) {
