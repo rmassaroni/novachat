@@ -117,7 +117,16 @@ function App() {
 
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <Sidebar collapsed={sidebar} collapsedWidth="0px">
-                    <h3 style={{ paddingLeft: 10 }}>Channels</h3>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <h3 style={{ paddingLeft: 10 }}>Channels</h3>
+                        <button>+</button>
+                    </div>
                     <Menu>
                         {
                             myChannels.map((channel) => (
