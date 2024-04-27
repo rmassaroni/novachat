@@ -41,7 +41,8 @@
 .container {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
+    overflow-x: hidden;
     scroll-behavior: smooth;
     /* Optional: adds smooth scrolling */
     width: 100vw;
