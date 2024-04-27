@@ -8,6 +8,7 @@ function App() {
     const usernames = [];
     var username1 = "user";
     const [username, setUsername] = useState(null);
+    const [sidebar, setSidebar] = useState(false);
     var myChannels = ["Global"];
     const roomUpdate = (newRoom) => {
         //myChannels = [...myChannels, newRoom];
@@ -101,12 +102,21 @@ function App() {
 
     return (
         <div>
-            <div className="App-header">
+            <div
+                className="App-header"
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                }}
+            >
+                <button onClick={() => setSidebar(!sidebar)}>Sidebar</button>
                 <h1 class="small-padding">novachat</h1>
+                <h1></h1>
             </div>
 
             <div style={{ display: "flex", flexDirection: "row" }}>
-                <Sidebar>
+                <Sidebar collapsed={sidebar} collapsedWidth="0px">
                     <h3 style={{ paddingLeft: 10 }}>Channels</h3>
                     <Menu>
                         {
