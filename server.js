@@ -22,16 +22,16 @@ const credentials = { key: privateKey, cert: certificate };
 //const io = new Server(server);
 
 const firebase = require('firebase-admin');
-const serviceAccount = require('./novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
+//const serviceAccount = require('./novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
 //firebase.initializeApp({
 //    credential: firebase.credential.cert(serviceAccount),
 //    databaseURL: 'https://novachat-b6eea.web.app'
 //});
-if (Object.keys(serviceAccount).length === 0 && serviceAccount.constructor === Object) {
-    console.error('Failed to require service account key. Make sure the path is correct.');
-} else {
-    console.log('Service account key required successfully.');
-}
+//if (Object.keys(serviceAccount).length === 0 && serviceAccount.constructor === Object) {
+//    console.error('Failed to require service account key. Make sure the path is correct.');
+//} else {
+//    console.log('Service account key required successfully.');
+//}
 
 //const credentials = {
 //    key: privateKey,
