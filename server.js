@@ -1,13 +1,79 @@
-//following imports are from original index.js. still figuring out where they should be
 const express = require('express');
 //const { createServer } = require('node:http');
-const http = require('http');
-//const { join } = require('node:path')
-const { join } = require('path');
+//const http = require('http');
+const https = require('https');
+const { join } = require('node:path')
+//const { join } = require('path');
 const { Server } = require('socket.io');
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+//const server = http.createServer(app);
+//const io = new Server(server);
+const cors = require('cors');
+const fs = require('fs');
+
+//const privateKey = fs.readFileSync('~/server.key', 'utf8');
+//const certificate = fs.readFileSync('~/server.crt', 'utf8');
+//const ca = fs.readFileSync('/path/to/ca_bundle.crt', 'utf8');
+
+const privateKey = fs.readFileSync('server.key', 'utf8');
+const certificate = fs.readFileSync('server.cert', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+//const server = https.createServer(credentials, app);
+//const io = new Server(server);
+
+const firebase = require('firebase-admin');
+const serviceAccount = require('./novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
+//firebase.initializeApp({
+//    credential: firebase.credential.cert(serviceAccount),
+//    databaseURL: 'https://novachat-b6eea.web.app'
+//});
+if (Object.keys(serviceAccount).length === 0 && serviceAccount.constructor === Object) {
+    console.error('Failed to require service account key. Make sure the path is correct.');
+} else {
+    console.log('Service account key required successfully.');
+}
+
+//const credentials = {
+//    key: privateKey,
+//    cert: certificate,
+//    ca: ca
+//};
+
+
+//app.use(cors({
+//    //origin: ['https://novachat-b6eea.web.app/', 'https://novachat-b6eea.firebaseapp.com/', 'https://nova-chat.com/']
+//	origin: '*'
+//}));
+//app.use(cors());
+app.use(cors({
+    origin: 'https://nova-chat.com'
+}));
+app.use(function(req, res, next) {
+	//res.setHeader('Access-Control-Allow-Origin', 'https://nova-chat.com');
+	//res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+	//res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+	res.header('Access-Control-Allow-Origin', req.headers.origin);
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+res.header('Access-Control-Allow-Origin', 'https://nova-chat.com');
+
+	next();
+});
+
+
+const httpsServer = https.createServer(credentials, app).listen(8443, '0.0.0.0', () => {
+    console.log('Server running on port 443');
+});
+//const httpsIO = new Server(httpsServer);
+const httpsIO = require("socket.io")(httpsServer, {
+  cors: {
+    origin: "https://nova-chat.com",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
+});
+
 
 var channels = [];
 var userNumber = 0;
@@ -15,7 +81,7 @@ var activeUsers = []; //identifies users by numbers for now until we have a prop
 
  app.use(express.static(join(__dirname, 'build')));
 //app.use(express.static('public'));
-io.on('connection', (socket) => {
+httpsIO.on('connection', (socket) => {
     console.log("user connected: ", socket.id);
     activeUsers.push(socket.id);
     userNumber++;
@@ -34,14 +100,14 @@ io.on('connection', (socket) => {
     newChannel(wifiname);
 
     socket.on('message', (msg) => {
-        io.emit('message', msg);
+        httpsIO.emit('message', msg);
     });
     socket.on('server message', (msg) => {
         //server messages will only be displayed to individuals?
-        io.emit('server message', msg);
+        httpsIO.emit('server message', msg);
     });
     socket.on('wifi', (w) => {
-        io.emit('wifi', w);
+        httpsIO.emit('wifi', w);
         socket.emit('message', w);
     });
     socket.on('disconnect', () => {
@@ -70,28 +136,28 @@ app.get('*', (req, res) => {
 });
 
 let wifiname = "";
-const { exec } = require('child_process');
-const command = 'powershell.exe -Command "Get-NetConnectionProfile | Select-Object -ExpandProperty Name"';
+//const { exec } = require('child_process');
+//const command = 'powershell.exe -Command "Get-NetConnectionProfile | Select-Object -ExpandProperty Name"';
 
 
 //server.listen(3000, '0.0.0.0', () => {
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log('server running at http://localhost:3000');
-    console.log(server.address);
-    exec(command, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`Error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-            return;
-        }
-        wifiname = stdout.trim();
-        console.log(wifiname);
-    });
+//server.listen(PORT, () => {
+//    console.log('server running at http://localhost:3000');
+//    console.log(server.address);
+//    exec(command, (error, stdout, stderr) => {
+//        if (error) {
+//            console.error(`Error: ${error.message}`);
+//            return;
+//        }
+//        if (stderr) {
+//            console.error(`stderr: ${stderr}`);
+//            return;
+//        }
+//        wifiname = stdout.trim();
+//        console.log(wifiname);
+//    });
 
-});
+//});
 
-module.exports = server;
+module.exports = httpsServer;
