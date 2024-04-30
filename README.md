@@ -25,7 +25,7 @@
   - Find a live alternative to 'npm run build' that similarly includes server side. 
 
 ## Tasks if we have extra time
- 
+- reactions, replies, gifs
 - login db.
 - convert to ts.
 - connect accounds to github or microsoft for security.
