@@ -110,7 +110,12 @@ function App() {
                     justifyContent: "space-between",
                 }}
             >
-                <button onClick={() => setSidebar(!sidebar)}>Sidebar</button>
+                <input
+                    style={{ width: "50px", height: "50px", padding: "10px" }}
+                    type="image"
+                    src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
+                    onClick={() => setSidebar(!sidebar)}
+                />
                 <h1 class="small-padding">novachat</h1>
                 <h1></h1>
             </div>
