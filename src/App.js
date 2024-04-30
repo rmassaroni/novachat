@@ -130,7 +130,11 @@ function App() {
                         }}
                     >
                         <h3 style={{ paddingLeft: 10 }}>Channels</h3>
-                        <button>+</button>
+                        <input
+                            style={{ width: "25px", height: "25px", padding: "20px" }}
+                            type="image"
+                            src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
+                        />
                     </div>
                     <Menu>
                         {
