@@ -2,12 +2,31 @@
 const express = require('express');
 //const { createServer } = require('node:http');
 const http = require('http');
+//const https = require('https');
 //const { join } = require('node:path')
 const { join } = require('path');
 const { Server } = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+const cors = require('cors');
+
+app.use(cors({
+    origin: ['https://novachat-b6eea.web.app/', 'https://novachat-b6eea.firebaseapp.com/']
+}));
+
+//const functions = require('firebase-functions');
+const firebase = require('firebase-admin');
+const serviceAccount = require('../novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
+firebase.initializeApp({
+    credential: firebase.credential.cert(serviceAccount),
+    databaseURL: 'https://novachat-b6eea.web.app'
+});
+if (Object.keys(serviceAccount).length === 0 && serviceAccount.constructor === Object) {
+    console.error('Failed to require service account key. Make sure the path is correct.');
+} else {
+    console.log('Service account key required successfully.');
+}
 
 var channels = [];
 var userNumber = 0;
@@ -93,5 +112,7 @@ server.listen(PORT, () => {
     });
 
 });
+
+//exports.app = functions.https.onRequest(app);
 
 module.exports = server;
