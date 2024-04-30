@@ -13,12 +13,15 @@ function App() {
         myChannels.push(newRoom);
     };
     useEffect(() => {
+	    const IP = '34.86.21.90i:8443';
+	    const URL = "https://"+IP+"/";
         //socketRef.current = io("http://localhost:3000");
 	    //socketRef.current = io('http://172.21.70.97:3000'); //for multi user testing
 	    //socketRef.current = io("https://novachat-b6eea.web.app/");
 	    //socketRef.current = io("http://35.199.26.16:3000/");
 	    //socketRef.current = io("https://35.199.26.16:8443/", {
-	    socketRef.current = io.connect("https:34.150.156.216:8443/", {
+	    //socketRef.current = io.connect("https://34.150.225.106:8443/", {
+	    socketRef.current = io.connect(URL, {
 		    withCredentials: true,
 		    extraHeaders: {
 			    "my-custom-header": "abcd"
