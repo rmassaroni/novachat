@@ -60,9 +60,9 @@ res.header('Access-Control-Allow-Origin', 'https://nova-chat.com');
 	next();
 });
 
-
-const httpsServer = https.createServer(credentials, app).listen(8443, '0.0.0.0', () => {
-    console.log('Server running on port 443');
+const PORT = 8443;
+const httpsServer = https.createServer(credentials, app).listen(PORT, '0.0.0.0', () => {
+    console.log('Server running on port '+PORT);
 });
 //const httpsIO = new Server(httpsServer);
 const httpsIO = require("socket.io")(httpsServer, {
@@ -141,7 +141,7 @@ let wifiname = "";
 
 
 //server.listen(3000, '0.0.0.0', () => {
-const PORT = process.env.PORT || 3000;
+//const PORT = process.env.PORT || 3000;
 //server.listen(PORT, () => {
 //    console.log('server running at http://localhost:3000');
 //    console.log(server.address);
