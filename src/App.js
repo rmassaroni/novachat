@@ -15,33 +15,43 @@ function App() {
         myChannels.push(newRoom);
     };
     useEffect(() => {
-        //socketRef.current = io("http://localhost:3000"); //uncomment this line and comment the next 3 for node testing on local host.  use localserver.js instead of server.js
-        const IP = '35.236.242.246:8443';
-            const URL = "https://"+IP+"/";
-        socketRef.current = io.connect(URL);
+        const IP = '35.236.242.246';
+        const PORT = '8443';
+        const URL = "https://"+IP+":"+PORT+"/";
+        const connectToServer = async () => {
+            try {
+                console.log("Connecting to server...");
+                //socketRef.current = io("http://localhost:3000"); //use this for testing on local host.
+                await fetch(URL);
+                socketRef.current = io.connect(URL);
 
-        socketRef.current.on("connect", () => {
-            console.log("Connected to server");
-            var id = Math.floor(Math.random() * 9000) + 1000; // random four digit number
-            setUsername("user" + id); // set a random username
-            username1 += id;
-            usernames.push(username1);
-            sendServerMessage("Username: " + username1);
-        });
-        socketRef.current.on("join room", (room) => {
-            roomUpdate(room);
-            sendServerMessage("myChannels: " + myChannels);
-        });
-        socketRef.current.on("message", (msg) => {
-            send(msg);
-        });
-        socketRef.current.on("server message", (msg) => {
-            sendServerMessage(msg);
-        });
-        socketRef.current.on("wifi", (wifi) => {
-            setWifiHeader(wifi);
-            roomUpdate(wifi);
-        });
+                socketRef.current.on("connect", () => {
+                    console.log("Connected to server");
+                    var id = Math.floor(Math.random() * 9000) + 1000; // random four digit number
+                    setUsername("user" + id); // set a random username
+                    username1 += id;
+                    usernames.push(username1);
+                    sendServerMessage("Username: " + username1);
+                });
+                socketRef.current.on("join room", (room) => {
+                    roomUpdate(room);
+                    sendServerMessage("myChannels: " + myChannels);
+                });
+                socketRef.current.on("message", (msg) => {
+                    send(msg);
+                });
+                socketRef.current.on("server message", (msg) => {
+                    sendServerMessage(msg);
+                });
+                socketRef.current.on("wifi", (wifi) => {
+                    setWifiHeader(wifi);
+                    roomUpdate(wifi);
+                });
+            } catch (error) {
+                console.error("ERROR connecting to server: \n" + "URL:", URL + "\nMESSAGE:", error.message);
+            }
+        };
+        connectToServer();
         return () => {
             socketRef.current.disconnect();
         };
