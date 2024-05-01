@@ -98,7 +98,7 @@ function App() {
 
     function setWifiHeader(wifi) {
         var wifiHeader = document.getElementById("wifi-header");
-        wifiHeader.textContent = "WiFi Channel: " + wifi;
+        wifiHeader.textContent = "Global: " + wifi;
         //setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
     }
 
@@ -156,7 +156,7 @@ function App() {
                     onKeyDown={handleKeyPress}
                 >
                     <div className="page">
-                        <h1 id="wifi-header">WiFi Channel: </h1>
+                        <h1 id="wifi-header">Global</h1>
                         <ul class="messages">
                             {messages.map((msg, index) => (
                                 <li key={index}>{msg}</li> // Render each message in the list
