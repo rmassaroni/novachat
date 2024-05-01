@@ -71,9 +71,11 @@ function App() {
         //     setNewMessage("");
         // }
     };
-    //dan, heres something for you to do.  create red messages.
+
     const sendServerMessage = (msg) => {
-        send("SERVER: " + msg);
+        send(
+            <p style={{ color: "red", textAlign: "center" }}>{"SERVER: " + msg}</p>,
+        );
     };
     //const socket = io('http://localhost:3000');
 
