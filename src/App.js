@@ -15,9 +15,7 @@ function App() {
         myChannels.push(newRoom);
     };
     useEffect(() => {
-        //socketRef.current = io("http://localhost:3000");
-        //socketRef.current = io('http://172.21.70.97:3000'); //for multi user testing
-        //socketRef.current = io("https://novachat-b6eea.web.app/");
+        //socketRef.current = io("http://localhost:3000"); //uncomment this line and comment the next 3 for node testing on local host.  use localserver.js instead of server.js
         const IP = '35.236.242.246:8443';
             const URL = "https://"+IP+"/";
         socketRef.current = io.connect(URL);
