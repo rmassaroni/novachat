@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 function App() {
-    const CONNECTED = false;
+    var CONNECTED = false;
     const socketRef = useRef();
     const usernames = [];
     const [username, setUsername] = useState(null);
