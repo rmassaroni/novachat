@@ -8,7 +8,7 @@ function App() {
     const usernames = [];
     var username1 = "user";
     const [username, setUsername] = useState(null);
-    const [sidebar, setSidebar] = useState(false);
+    const [sidebar, setSidebar] = useState(true);
     var myChannels = ["Global"];
     const roomUpdate = (newRoom) => {
         //myChannels = [...myChannels, newRoom];
@@ -138,6 +138,7 @@ function App() {
                             type="image"
                             alt="add channel icon"
                             src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
+                            onClick={() => console.log("Add channel")}
                         />
                     </div>
                     <Menu>
