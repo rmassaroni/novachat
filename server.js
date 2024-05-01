@@ -52,13 +52,15 @@ app.use(function(req, res, next) {
 	//res.setHeader('Access-Control-Allow-Origin', 'https://nova-chat.com');
 	//res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 	//res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-	res.header('Access-Control-Allow-Origin', req.headers.origin);
+	//res.header('Access-Control-Allow-Origin', req.headers.origin);
+	res.header('Access-Control-Allow-Origin', 'https://nova-chat.com');
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 res.header('Access-Control-Allow-Origin', 'https://nova-chat.com');
 
 	next();
 });
+
 
 const PORT = 8443;
 const httpsServer = https.createServer(credentials, app).listen(PORT, '0.0.0.0', () => {
@@ -128,12 +130,12 @@ httpsIO.on('connection', (socket) => {
 });
 
 //app.use(express.static(join(__dirname, 'public')));
-app.get('/', (req, res) => {
-    res.sendFile(join(__dirname, 'public', 'index.html'));
-});
-app.get('*', (req, res) => {
-    res.sendFile(join(__dirname, 'build', 'index.html'));
-});
+//app.get('/', (req, res) => {
+//    res.sendFile(join(__dirname, 'public', 'index.html'));
+//});
+//app.get('*', (req, res) => {
+//    res.sendFile(join(__dirname, 'build', 'index.html'));
+//});
 
 let wifiname = "";
 //const { exec } = require('child_process');

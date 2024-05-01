@@ -13,7 +13,7 @@ function App() {
         myChannels.push(newRoom);
     };
     useEffect(() => {
-	    const IP = '34.86.21.90i:8443';
+	    const IP = '35.236.242.246:8443';
 	    const URL = "https://"+IP+"/";
         //socketRef.current = io("http://localhost:3000");
 	    //socketRef.current = io('http://172.21.70.97:3000'); //for multi user testing
