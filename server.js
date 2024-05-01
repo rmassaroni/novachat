@@ -1,20 +1,28 @@
-//following imports are from original index.js. still figuring out where they should be
 const express = require('express');
-//const { createServer } = require('node:http');
-const http = require('http');
-//const { join } = require('node:path')
-const { join } = require('path');
+const { join } = require('node:path')
+//const { join } = require('path');
 const { Server } = require('socket.io');
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+//const io = new Server(server);
 
 var channels = [];
 var userNumber = 0;
 var activeUsers = []; //identifies users by numbers for now until we have a proper database.
 
- app.use(express.static(join(__dirname, 'build')));
-//app.use(express.static('public'));
+const firebase = require('firebase-admin');
+const serviceAccount = require('../../novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
+firebase.initializeApp({
+    credential: firebase.credential.cert(serviceAccount),
+    databaseURL: 'https://novachat-b6eea.web.app'
+});
+if (Object.keys(serviceAccount).length === 0 && serviceAccount.constructor === Object) {
+    console.error('Failed to require service account key. Make sure the path is correct.');
+} else {
+    console.log('Service account key required successfully.');
+}
+
+
+app.use(express.static(join(__dirname, 'build')));
 io.on('connection', (socket) => {
     console.log("user connected: ", socket.id);
     activeUsers.push(socket.id);
