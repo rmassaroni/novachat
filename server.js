@@ -1,13 +1,13 @@
 //following imports are from original index.js. still figuring out where they should be
 const express = require('express');
 //const { createServer } = require('node:http');
-const http = require('http');
+//const http = require('http');
 //const https = require('https');
 //const { join } = require('node:path')
 const { join } = require('path');
 const { Server } = require('socket.io');
 const app = express();
-const server = http.createServer(app);
+//const server = http.createServer(app);
 const io = new Server(server);
 const cors = require('cors');
 
