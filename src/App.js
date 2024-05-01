@@ -61,15 +61,10 @@ function App() {
     const send = (msg = "") => {
         if (msg !== "") {
             setMessages((prevMessages) => [...prevMessages, msg]);
-        } else {
-            if (newMessage.trim() !== "") {
+        } else if (newMessage.trim() !== "") {
                 socketRef.current.emit("message", newMessage);
                 setNewMessage("");
             }
-            // } else {
-            //     socketRef.current.emit("message", "empty message");
-            //     setNewMessage("");
-            // }
         }
     };
 
