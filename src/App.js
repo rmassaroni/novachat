@@ -4,16 +4,17 @@ import io from "socket.io-client";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 function App() {
+    const CONNECTED = false;
     const socketRef = useRef();
     const usernames = [];
-    var username1 = "user";
     const [username, setUsername] = useState(null);
     const [sidebar, setSidebar] = useState(false);
+    const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState("");
+    const roomUpdate = (newRoom) => { myChannels.push(newRoom); };
+    var username1 = "user";
     var myChannels = ["Global"];
-    const roomUpdate = (newRoom) => {
-        //myChannels = [...myChannels, newRoom];
-        myChannels.push(newRoom);
-    };
+
     useEffect(() => {
         const IP = '35.236.242.246';
         const PORT = '8443';
@@ -24,7 +25,7 @@ function App() {
                 //socketRef.current = io("http://localhost:3000"); //use this for testing on local host.
                 await fetch(URL);
                 socketRef.current = io.connect(URL);
-
+                CONNECTED = true;
                 socketRef.current.on("connect", () => {
                     console.log("Connected to server");
                     var id = Math.floor(Math.random() * 9000) + 1000; // random four digit number
@@ -56,8 +57,6 @@ function App() {
             socketRef.current.disconnect();
         };
     }, []);
-    const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState("");
     const send = (msg = "") => {
         if (msg !== "") {
             setMessages((prevMessages) => [...prevMessages, msg]);
