@@ -57,6 +57,7 @@ function App() {
             socketRef.current.disconnect();
         };
     }, []);
+
     const send = (msg = "") => {
         if (msg !== "") {
             setMessages((prevMessages) => [...prevMessages, msg]);
@@ -71,6 +72,7 @@ function App() {
             // }
         }
     };
+
     const sendChatMessage = () => {
         if (newMessage.trim() !== "") {
             socketRef.current.emit("message", username + ": " + newMessage);
@@ -87,7 +89,6 @@ function App() {
             <p style={{ color: "red", textAlign: "center" }}>{"SERVER: " + msg}</p>,
         );
     };
-    //const socket = io('http://localhost:3000');
 
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
