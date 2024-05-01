@@ -3,7 +3,7 @@ const { join } = require('node:path')
 //const { join } = require('path'); //might need
 const { Server } = require('socket.io');
 const app = express();
-//const io = new Server(server);
+const io = new Server(server);
 
 var channels = [];
 var userNumber = 0;
