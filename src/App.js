@@ -25,7 +25,7 @@ function App() {
             setUsername("user" + id); // set a random username
             username1 += id;
             usernames.push(username1);
-            sendServerMessage("Username: " + username1);
+            sendServerMessage("Your default username: " + username1);
         });
         socketRef.current.on("join room", (room) => {
             roomUpdate(room);
@@ -73,9 +73,7 @@ function App() {
     };
 
     const sendServerMessage = (msg) => {
-        send(
-            <p style={{ color: "red", textAlign: "center" }}>{"SERVER: " + msg}</p>,
-        );
+        send(<p style={{ color: "red", textAlign: "center" }}>{msg}</p>);
     };
     //const socket = io('http://localhost:3000');
 
