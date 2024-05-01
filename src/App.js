@@ -22,8 +22,8 @@ function App() {
         const connectToServer = async () => {
             try {
                 console.log("Connecting to server...");
-                //socketRef.current = io("http://localhost:3000"); //use this for testing on local host.
                 await fetch(URL);
+                //socketRef.current = io("http://localhost:3000"); //use this for testing on local host.
                 socketRef.current = io.connect(URL);
                 CONNECTED = true;
                 socketRef.current.on("connect", () => {
