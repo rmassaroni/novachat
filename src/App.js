@@ -9,10 +9,10 @@ function App() {
     var username1 = "user";
     const [username, setUsername] = useState(null);
     const [sidebar, setSidebar] = useState(true);
-    var myChannels = ["Global"];
+    const [myChannels, setMyChannels] = useState(["Global"]);
     const roomUpdate = (newRoom) => {
         //myChannels = [...myChannels, newRoom];
-        myChannels.push(newRoom);
+        setMyChannels((prevChannels) => [...prevChannels, newRoom]);
     };
     useEffect(() => {
         socketRef.current = io("http://localhost:3000");
@@ -138,7 +138,10 @@ function App() {
                             type="image"
                             alt="add channel icon"
                             src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
-                            onClick={() => console.log("Add channel")}
+                            onClick={() => {
+                                const c = prompt("Enter channel name to join/create:");
+                                if (c !== null && c.trim() !== "") roomUpdate(c);
+                            }}
                         />
                     </div>
                     <Menu>
