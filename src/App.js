@@ -145,7 +145,17 @@ function App() {
                     <Menu>
                         {
                             myChannels.map((channel) => (
-                                <MenuItem>{channel}</MenuItem>
+                                <MenuItem
+                                    component={
+                                        <p
+                                            onClick={() => {
+                                                console.log("Joining channel: " + channel);
+                                            }}
+                                        />
+                                    }
+                                >
+                                    {channel}
+                                </MenuItem>
                             )) // List all the channels
                         }
                     </Menu>
