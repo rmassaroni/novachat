@@ -115,11 +115,12 @@ function App() {
                 <input
                     style={{ width: "50px", height: "50px", padding: "10px" }}
                     type="image"
+                    alt="sidebar icon"
                     src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
                     onClick={() => setSidebar(!sidebar)}
                 />
                 <h1 class="small-padding">novachat</h1>
-                <h1></h1>
+                <p></p>
             </div>
 
             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -135,6 +136,7 @@ function App() {
                         <input
                             style={{ width: "25px", height: "25px", padding: "20px" }}
                             type="image"
+                            alt="add channel icon"
                             src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
                         />
                     </div>
