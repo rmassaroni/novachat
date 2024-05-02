@@ -4,13 +4,14 @@ import io from "socket.io-client";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 function App() {
-    var CONNECTED = false;
+    const CONNECTED = false;
     const socketRef = useRef();
     const usernames = [];
     const [username, setUsername] = useState("user");
     const [sidebar, setSidebar] = useState(true);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const [serverStatus, setServerStatus] = useState("unable to connect to server")
     const roomUpdate = (newRoom) => { setMyChannels((prevChannels) => [...prevChannels, newRoom]); };
     var username1 = "user";
     //var myChannels = ["Global"];
@@ -27,13 +28,13 @@ function App() {
                 await fetch(URL);
                 //socketRef.current = io("http://localhost:3000"); //use this for testing on local host. would need to redownload all the old modules.
                 socketRef.current = io.connect(URL);
-                CONNECTED = true;
                 socketRef.current.on("connect", () => {
                     console.log("Connected to server");
                     var id = Math.floor(Math.random() * 9000) + 1000; // random four digit number
                     setUsername("user" + id); // set a random username
                     username1 += id;
                     usernames.push(username1);
+                    setServerStatus("connected to server");
                 });
                 socketRef.current.on("socket id", (sid) => {
                     setUsername(sid);
@@ -54,6 +55,10 @@ function App() {
                 socketRef.current.on("wifi", (wifi) => {
                     setWifiHeader(wifi);
                     roomUpdate(wifi);
+                });
+                socketRef.current.on("server status", (status) => {
+                    console.log("set server status");
+                    document.getElementById("server-status").innerText = status;
                 });
             } catch (error) {
                 console.error("ERROR connecting to server: \n" + "URL:", URL + "\nMESSAGE:", error.message);
@@ -238,7 +243,7 @@ function App() {
                             </div>
                             <div class="line" />
                             <div class="line">
-                                <h3>Server Status:</h3>
+                                <h3>Server Status: {serverStatus}</h3>
                             </div>
                         </div>
                         <ul className="messages">
