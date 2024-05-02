@@ -7,7 +7,7 @@ function App() {
     var CONNECTED = false;
     const socketRef = useRef();
     const usernames = [];
-    const [username, setUsername] = useState(null);
+    const [username, setUsername] = useState("user");
     const [sidebar, setSidebar] = useState(true);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
@@ -15,6 +15,7 @@ function App() {
     var username1 = "user";
     //var myChannels = ["Global"];
     const [myChannels, setMyChannels] = useState(["Global"]);
+    var currentUsername;
 
     useEffect(() => {
         const IP = '35.236.242.246';
@@ -36,14 +37,16 @@ function App() {
                 });
                 socketRef.current.on("socket id", (sid) => {
                     setUsername(sid);
-                    sendServerMessage("Your default username: " + username);
+                    currentUsername = sid;
+                    
+                    sendServerMessage("Your default username: " + currentUsername);
                 })
                 socketRef.current.on("join room", (room) => {
                     roomUpdate(room);
                     sendServerMessage("myChannels: " + myChannels);
                 });
                 socketRef.current.on("message", (msg) => {
-                    if(msg.startsWith(username + ":") == false)
+                    if(msg.startsWith(currentUsername + ":") == false)
                         send(msg);
                 });
                 socketRef.current.on("server message", (msg) => {
