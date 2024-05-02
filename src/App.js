@@ -138,31 +138,51 @@ function App() {
                     alignItems: "center",
                     paddingRight: "10px",
                     height: "70px",
-                    borderRadius: "5px"
                 }}
             >
                 <div class="line">
                     <input
-                        style={{ width: "50px", height: "50px", padding: "10px", marginTop: "15px" }}
+                        style={{ width: "50px", height: "50px", padding: "10px", marginTop: "15px", paddingRight: "15px" }}
                         type="image"
                         alt="sidebar icon"
                         src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
                         onClick={() => setSidebar(!sidebar)}
                     />
 
-                <h2>Global Channel</h2>
+                    <div class="line">
+                        <h2>Channel: Global</h2>
+                    </div>
                 </div>
 
                 
-
+{/*
                 <div class="trapezoid" style={{
                     fontSize: "50px",
                 }}>
                     <h1 class="trapezoid-text">
                     novachat</h1> </div>
+*/}
+                <div style={{ position: "relative", display: "inlineBlock"}}>
+                    <img style={{ marginTop: "38px" }}src="/banner.png" alt="novachat banner" />
+                    <h1 style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        padding: "1px",
+                        fontSize: "3.6em",
+                        marginTop: "6px"
+                    }}>
+                        novachat
+                    </h1>
 
-                <h2>Chatting as: </h2>
-                <img style={{ width: "50px", height: "50px", padding: "0px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
+                </div>
+                <div class="line" style={{justifyContent: "flex-end"}}>
+                    <div class="line">
+                        <h2 style={{ paddingRight: "15px" }}>Chatting as: </h2>
+                    </div>
+                    <img style={{ width: "50px", height: "50px", padding: "0px", marginTop: "25px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
+                </div>
             </div>
 
             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -212,6 +232,15 @@ function App() {
                     onKeyDown={handleKeyPress}
                 >
                     <div className="page">
+                        <div class="line" style={{ width: "90vw", height: "40px", alignItems: "center" }}>
+                            <div class="line">
+                                <h3>Active Users:</h3>
+                            </div>
+                            <div class="line" />
+                            <div class="line">
+                                <h3>Server Status:</h3>
+                            </div>
+                        </div>
                         <ul className="messages">
                             {messages.map((msg, index) => (
                                 <li key={index}>{msg}</li> // Render each message in the list
