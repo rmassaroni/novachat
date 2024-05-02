@@ -64,7 +64,6 @@ function App() {
         } else if (newMessage.trim() !== "") {
                 socketRef.current.emit("message", newMessage);
                 setNewMessage("");
-            }
         }
     };
 
@@ -116,6 +115,7 @@ function App() {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
+                    alignItems: "center",
                 }}
             >
                 <input
@@ -125,8 +125,10 @@ function App() {
                     src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
                     onClick={() => setSidebar(!sidebar)}
                 />
-                <h1 class="small-padding">novachat</h1>
-                <p></p>
+                
+
+                <h1 className="small-padding">novachat</h1>
+                <div style={{ width: "50px", height: "50px", padding: "10px" }} />
             </div>
 
             <div style={{ display: "flex", flexDirection: "row" }}>
