@@ -39,7 +39,6 @@
 }
 
 .container {
-    display: flex;
     flex-wrap: nowrap;
     /* overflow-x: scroll; */
     overflow-x: hidden;
@@ -54,17 +53,24 @@
 }
 
 .page {
-    flex: 0 0 100vw;
+    flex: 0 0 98vw;
     /* Each page takes the full viewport width */
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
     padding-top: 0px;
-    align-items: left;
-    justify-content: flex-start;
+    align-items: center;
     font-size: 20;
     height: 49vh;
-    max-width: 99vw;
+}
+
+.page h1 {
+    width: 96vw;
+}
+
+
+.page ul {
+    width: 98vw;
+    align-self: center;
 }
 
 .input-class {
@@ -101,12 +107,10 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    max-width: 95vw;
 }
 
 .messages li {
     padding: 0.5rem 1rem;
-    max-width: 95vw;
 }
 
 .messages li:nth-child(odd) {
