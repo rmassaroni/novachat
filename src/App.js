@@ -8,7 +8,7 @@ function App() {
     const socketRef = useRef();
     const usernames = [];
     const [username, setUsername] = useState(null);
-    const [sidebar, setSidebar] = useState(false);
+    const [sidebar, setSidebar] = useState(true);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const roomUpdate = (newRoom) => { myChannels.push(newRoom); };
@@ -147,6 +147,7 @@ function App() {
                             type="image"
                             alt="add channel icon"
                             src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
+                            onClick={() => console.log("Add channel")}
                         />
                     </div>
                     <Menu>
