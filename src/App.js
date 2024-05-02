@@ -24,7 +24,7 @@ function App() {
             try {
                 console.log("Connecting to server...");
                 await fetch(URL);
-                //socketRef.current = io("http://localhost:3000"); //use this for testing on local host.
+                //socketRef.current = io("http://localhost:3000"); //use this for testing on local host. would need to redownload all the old modules.
                 socketRef.current = io.connect(URL);
                 CONNECTED = true;
                 socketRef.current.on("connect", () => {
@@ -105,6 +105,11 @@ function App() {
         var wifiHeader = document.getElementById("wifi-header");
         wifiHeader.textContent = "Global: " + wifi;
         //setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
+    }
+
+
+    function renderMessage() {
+
     }
 
     return (
