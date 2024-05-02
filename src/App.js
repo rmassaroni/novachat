@@ -33,14 +33,18 @@ function App() {
                     setUsername("user" + id); // set a random username
                     username1 += id;
                     usernames.push(username1);
-                    sendServerMessage("Your default username: " + username1);
                 });
+                socketRef.current.on("socket id", (sid) => {
+                    setUsername(sid);
+                    sendServerMessage("Your default username: " + username);
+                })
                 socketRef.current.on("join room", (room) => {
                     roomUpdate(room);
                     sendServerMessage("myChannels: " + myChannels);
                 });
                 socketRef.current.on("message", (msg) => {
-                    //send(msg);
+                    if(msg.startsWith(username + ":") == false)
+                        send(msg);
                 });
                 socketRef.current.on("server message", (msg) => {
                     sendServerMessage(msg);
