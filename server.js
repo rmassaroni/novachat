@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
             channels.push(roomName);
         }
         socket.join(roomName);
-    };
+    }
     newChannel(wifiname);
 
     socket.on('message', (msg) => {
@@ -56,17 +56,17 @@ io.on('connection', (socket) => {
         console.log('user disconnected: ', socket.id);
         //delete room if zero users are connected
         userNumber--;
-        activeUsers = [...activeUsers.slice(0, activeUsers.indexOf(socket.id)), ...activeUsers.slice(activeUsers.indexOf(socket.id) + 1)];
+        //activeUsers = [...activeUsers.slice(0, activeUsers.indexOf(socket.id)), ...activeUsers.slice(activeUsers.indexOf(socket.id) + 1)];
+        activeUsers = [
+            ...activeUsers.slice(0, activeUsers.indexOf(socket.id)),
+            ...activeUsers.slice(activeUsers.indexOf(socket.id) + 1),
+        ];
     });
 
     socket.emit('user number', socket.id);
-    socket.emit('server message', wifiname);
-    //socket.emit('server message', "server message test");
-    socket.emit('wifi', wifiname);
     console.log('channels: ', channels);
     console.log('active users: ',activeUsers);
     socket.emit('server message', userNumber+" active user(s)");
-    socket.emit('join room', "dev_room");
 });
 
 //app.use(express.static(join(__dirname, 'public')));
