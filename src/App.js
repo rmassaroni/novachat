@@ -137,6 +137,7 @@ function App() {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    paddingRight: "10px"
                 }}
             >
                 <input
@@ -149,7 +150,7 @@ function App() {
                 
 
                 <h1 className="small-padding">novachat</h1>
-                <div style={{ width: "50px", height: "50px", padding: "10px" }} />
+                <img style={{ width: "50px", height: "50px", padding: "0px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
             </div>
 
             <div style={{ display: "flex", flexDirection: "row" }}>
