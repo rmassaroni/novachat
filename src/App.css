@@ -14,7 +14,7 @@
 }
 
 .App-header {
-    background-color: #282c34;
+    background-color: #7474a3;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,6 +22,7 @@
     font-size: calc(5px + 2vmin);
     color: white;
     gap: 0px;
+    border-color: #282c34;
 }
 
 .App-link {
@@ -32,9 +33,9 @@
     border-bottom: 350px;
     border-left: 70px solid #0000;
     border-right: 70px solid #0000;
-    border-top: 90px solid #0018d5;
+    border-top: 90px solid #282c34;
     height: 0;
-    margin-left: 13px;
+    margin-left: 72px;
     width: 300px;
 }
 
@@ -78,7 +79,7 @@
     /* Each page takes the full viewport width */
     display: flex;
     flex-direction: column;
-    padding-top: 0px;
+    padding-top: 10px;
     align-items: center;
     font-size: 20;
     height: 49vh;

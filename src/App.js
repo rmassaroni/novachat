@@ -43,7 +43,6 @@ function App() {
                 })
                 socketRef.current.on("join room", (room) => {
                     roomUpdate(room);
-                    sendServerMessage("myChannels: " + myChannels);
                 });
                 socketRef.current.on("message", (msg) => {
                     if(msg.startsWith(currentUsername + ":") == false)
@@ -138,16 +137,22 @@ function App() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     paddingRight: "10px",
-                    height: "70px"
+                    height: "70px",
+                    borderRadius: "5px"
                 }}
             >
-                <input
-                    style={{ width: "50px", height: "50px", padding: "10x" }}
-                    type="image"
-                    alt="sidebar icon"
-                    src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
-                    onClick={() => setSidebar(!sidebar)}
-                />
+                <div class="line">
+                    <input
+                        style={{ width: "50px", height: "50px", padding: "10px", marginTop: "15px" }}
+                        type="image"
+                        alt="sidebar icon"
+                        src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
+                        onClick={() => setSidebar(!sidebar)}
+                    />
+
+                <h2>Global Channel</h2>
+                </div>
+
                 
 
                 <div class="trapezoid" style={{
@@ -156,6 +161,7 @@ function App() {
                     <h1 class="trapezoid-text">
                     novachat</h1> </div>
 
+                <h2>Chatting as: </h2>
                 <img style={{ width: "50px", height: "50px", padding: "0px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
             </div>
 
@@ -206,7 +212,6 @@ function App() {
                     onKeyDown={handleKeyPress}
                 >
                     <div className="page">
-                        <h1 id="wifi-header">Global</h1>
                         <ul className="messages">
                             {messages.map((msg, index) => (
                                 <li key={index}>{msg}</li> // Render each message in the list
