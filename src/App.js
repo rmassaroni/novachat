@@ -40,7 +40,7 @@ function App() {
                     sendServerMessage("myChannels: " + myChannels);
                 });
                 socketRef.current.on("message", (msg) => {
-                    send(msg);
+                    //send(msg);
                 });
                 socketRef.current.on("server message", (msg) => {
                     sendServerMessage(msg);
@@ -72,6 +72,9 @@ function App() {
     const sendChatMessage = () => {
         if (newMessage.trim() !== "") {
             socketRef.current.emit("message", username + ": " + newMessage);
+            const formattedMsg = <p className="messages"><strong>{username}:</strong> {newMessage.trim()}</p>
+
+            setMessages((prevMessages) => [...prevMessages, formattedMsg]);
             setNewMessage("");
         }
         // } else {
