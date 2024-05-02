@@ -81,7 +81,7 @@ function App() {
     };
 
     const sendServerMessage = (msg) => {
-        send(<p style={{ color: "red" }}>{msg}</p>);
+        send(msg);
     };
 
     const containerRef = useRef(null);
