@@ -14,8 +14,6 @@ https://35.236.242.246:8443/
     - Secondary: transparent arrows on left and right of screen to switch pages
       - Fix horizontal scrolling to be exact
   - Function to create channel pages programmatically for each element of myChannels.
-  - Should we remove server messages?
-  - Red server messages
   - Center message boxes
   - Welcome popup on joining channels. warning on global channel
   - add 'chatting as: ' somewhere
