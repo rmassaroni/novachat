@@ -100,7 +100,9 @@
 }
 
 .server-message {
-    font-size: 25px;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    color: red;
 }
 
 .messages {

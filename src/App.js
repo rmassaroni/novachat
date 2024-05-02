@@ -81,7 +81,9 @@ function App() {
     };
 
     const sendServerMessage = (msg) => {
-        send(msg);
+        //send(msg);
+        const formattedMsg = <p className="server-message">{msg}</p>;
+        setMessages((prevMessages) => [...prevMessages, formattedMsg]);
     };
 
     const containerRef = useRef(null);
@@ -108,9 +110,13 @@ function App() {
     }
 
 
-    function renderMessage() {
-
-    }
+    const renderMessage = (msg, index) => {
+        return (
+            <li key={index} className={msg.startsWith("SERVER") ? "server-message" : ""}>
+                {msg}
+            </li>
+        );
+    };
 
     return (
         <div>
@@ -184,7 +190,7 @@ function App() {
                 >
                     <div className="page">
                         <h1 id="wifi-header">Global</h1>
-                        <ul class="messages">
+                        <ul className="messages">
                             {messages.map((msg, index) => (
                                 <li key={index}>{msg}</li> // Render each message in the list
                             ))}
