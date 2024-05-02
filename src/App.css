@@ -46,6 +46,7 @@
     /* Optional: adds smooth scrolling */
     width: 100vw;
     height: 85vh;
+    background-color: grey;
 }
 
 .container::-webkit-scrollbar {
