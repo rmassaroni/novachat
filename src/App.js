@@ -137,11 +137,12 @@ function App() {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    paddingRight: "10px"
+                    paddingRight: "10px",
+                    height: "70px"
                 }}
             >
                 <input
-                    style={{ width: "50px", height: "50px", padding: "10px" }}
+                    style={{ width: "50px", height: "50px", padding: "10x" }}
                     type="image"
                     alt="sidebar icon"
                     src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
@@ -149,7 +150,12 @@ function App() {
                 />
                 
 
-                <h1 className="small-padding">novachat</h1>
+                <div class="trapezoid" style={{
+                    fontSize: "50px",
+                }}>
+                    <h1 class="trapezoid-text">
+                    novachat</h1> </div>
+
                 <img style={{ width: "50px", height: "50px", padding: "0px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
             </div>
 

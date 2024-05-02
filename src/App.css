@@ -28,6 +28,26 @@
     color: #61dafb;
 }
 
+.trapezoid {
+    border-bottom: 350px;
+    border-left: 70px solid #0000;
+    border-right: 70px solid #0000;
+    border-top: 90px solid #0018d5;
+    height: 0;
+    margin-left: 13px;
+    width: 300px;
+}
+
+.trapezoid-text {
+    position: absolute; /* Position the text absolutely within the trapezoid */
+    top: -1%; /* Align the text vertically at the center */
+    left: 50%; /* Align the text horizontally at the center */
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white; /* Set text color */
+    font-size: larger;
+}
+
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -46,7 +66,7 @@
     /* Optional: adds smooth scrolling */
     width: 100vw;
     height: 85vh;
-    background-color: grey;
+    background-color: ghostwhite;
 }
 
 .container::-webkit-scrollbar {
@@ -62,7 +82,7 @@
     align-items: center;
     font-size: 20;
     height: 49vh;
-    background-color: grey;
+    background-color: ghostwhite;
 }
 
 .page h1 {
@@ -96,6 +116,32 @@
     background-color: black;
     margin: 0 7px;
     /* Adjust the margin to control the space between elements */
+}
+
+.header {
+    width: 200px; /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
+    position: relative;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 50px solid transparent; /* Adjust to change the width of the top-left side */
+    border-right: 50px solid transparent; /* Adjust to change the width of the top-right side */
+    border-bottom: 50px solid #ccc; /* Adjust to change the color and height of the trapezoid */
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 50px solid transparent; /* Adjust to change the width of the top-left side */
+    border-right: 50px solid transparent; /* Adjust to change the width of the top-right side */
+    border-bottom: 50px solid #ccc; 
 }
 
 .small-padding {
