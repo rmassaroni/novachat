@@ -69,6 +69,9 @@
 
 
 .page ul {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+
     width: 98vw;
     align-self: center;
 }

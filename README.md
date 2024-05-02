@@ -18,7 +18,7 @@ https://35.236.242.246:8443/
   - Welcome popup on joining channels. warning on global channel
   - add 'chatting as: ' somewhere
   - add our github links somewhere
-  - tab icon not loading
+  - dark mode
 
 ## Backend Contributing Instructions
 
