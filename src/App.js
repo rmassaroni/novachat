@@ -11,9 +11,10 @@ function App() {
     const [sidebar, setSidebar] = useState(true);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const roomUpdate = (newRoom) => { myChannels.push(newRoom); };
+    const roomUpdate = (newRoom) => { setMyChannels((prevChannels) => [...prevChannels, newRoom]); };
     var username1 = "user";
-    var myChannels = ["Global"];
+    //var myChannels = ["Global"];
+    const [myChannels, setMyChannels] = useState(["Global"]);
 
     useEffect(() => {
         const IP = '35.236.242.246';
@@ -147,7 +148,10 @@ function App() {
                             type="image"
                             alt="add channel icon"
                             src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
-                            onClick={() => console.log("Add channel")}
+                            onClick={() => {
+                                const c = prompt("Enter channel name to join/create:");
+                                if (c !== null && c.trim() !== "") roomUpdate(c);
+                            }}
                         />
                     </div>
                     <Menu>
