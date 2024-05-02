@@ -50,6 +50,7 @@ function App() {
                 });
             } catch (error) {
                 console.error("ERROR connecting to server: \n" + "URL:", URL + "\nMESSAGE:", error.message);
+                sendServerMessage("ERROR connecting to server. Try this URL: " + URL); //make url clickable
             }
         };
         connectToServer();
