@@ -68,6 +68,8 @@
     width: 100vw;
     height: 90vh;
     background-color: ghostwhite;
+    border-radius: 20px;
+    border: 1px solid #ccc;
 }
 
 .container::-webkit-scrollbar {

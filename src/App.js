@@ -1,24 +1,82 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import CheckIcon from "@mui/icons-material/Check";
+import cx from "classnames";
+import { motion, AnimatePresence } from "framer-motion";
+import styled, { keyframes } from "styled-components";
 import io from "socket.io-client";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+
+const rotate = keyframes`
+from {
+transform: rotate(0deg);
+}
+
+to {
+transform: rotate(360deg);
+}
+`;
+const Container = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 16px;
+box-sizing: border-box;
+`;
+
+const brandColorPrimary = "#5b13df";
+const RefreshButton = styled.button`
+width: 2rem;
+height: 2rem;
+padding: 0;
+margin: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+cursor: pointer;
+border-radius: 100%;
+border: 0;
+background: #fff;
+outline-color: ${brandColorPrimary};
+.refresh--icon.refresh--icon__is-refreshing {
+animation: ${rotate} 1s infinite;
+animation-timing-function: cubic-bezier(0.42, 0.2, 0.58, 1);
+}
+`;
+
+const SuccessIcon = styled(motion.div)`
+position: absolute;
+`;
+
 
 function App() {
     const CONNECTED = false;
     const socketRef = useRef();
     const usernames = [];
+    const connectionMessage = "connected to server";
+    
     const [username, setUsername] = useState("user");
     const [sidebar, setSidebar] = useState(true);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const [serverStatus, setServerStatus] = useState("unable to connect to server")
+    const [serverStatus, setServerStatus] = useState("connecting...");
+    const [userCount, setUserCount] = useState(0);
+    const [refreshing, setRefreshing] = useState(false);
+    const [editingUsername, setEditingUsername] = useState(false);
+    const [editedUsername, setEditedUsername] = useState("");
+
     const roomUpdate = (newRoom) => { setMyChannels((prevChannels) => [...prevChannels, newRoom]); };
     var username1 = "user";
     //var myChannels = ["Global"];
     const [myChannels, setMyChannels] = useState(["Global"]);
     var currentUsername;
 
-    useEffect(() => {
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
+
         const IP = '35.236.242.246';
         const PORT = '8443';
         const URL = "https://"+IP+":"+PORT+"/";
@@ -29,12 +87,14 @@ function App() {
                 //socketRef.current = io("http://localhost:3000"); //use this for testing on local host. would need to redownload all the old modules.
                 socketRef.current = io.connect(URL);
                 socketRef.current.on("connect", () => {
-                    console.log("Connected to server");
+                    console.log(connectionMessage);
                     var id = Math.floor(Math.random() * 9000) + 1000; // random four digit number
                     setUsername("user" + id); // set a random username
                     username1 += id;
                     usernames.push(username1);
-                    setServerStatus("connected to server");
+                    setServerStatus(connectionMessage);
+                    setIsRefreshing(false);
+                    setShowSuccess(true);
                 });
                 socketRef.current.on("socket id", (sid) => {
                     setUsername(sid);
@@ -45,6 +105,9 @@ function App() {
                 socketRef.current.on("join room", (room) => {
                     roomUpdate(room);
                 });
+                socketRef.current.on("user count", (count) => {
+                    setUserCount(count);
+                })
                 socketRef.current.on("message", (msg) => {
                     if(msg.startsWith(currentUsername + ":") == false)
                         send(msg);
@@ -62,9 +125,39 @@ function App() {
                 });
             } catch (error) {
                 console.error("ERROR connecting to server: \n" + "URL:", URL + "\nMESSAGE:", error.message);
-                sendServerMessage("ERROR connecting to server. Try this URL: " + URL); //make url clickable
+                //sendServerMessage("ERROR connecting to server. Try this URL: " + URL); //make url clickable
+                setIsRefreshing(false);
+                setServerStatus("FAILED");
             }
         };
+
+
+    useEffect(() => {
+        let refreshTimer;
+        let successTimer;
+        if (isRefreshing) {
+
+            if(serverStatus == connectionMessage) socketRef.current.disconnect();
+            setServerStatus("refeshing...");
+            connectToServer();
+            //connectToServer()
+            refreshTimer = setTimeout(() => {
+                setIsRefreshing(false);
+                setShowSuccess(true);
+            }, 3000);
+        }
+        if (showSuccess) {
+            successTimer = setTimeout(() => {
+                setShowSuccess(false);
+            }, 1500);
+        }
+        return () => {
+            clearTimeout(refreshTimer);
+            clearTimeout(successTimer);
+        };
+    }, [isRefreshing, showSuccess]);
+
+    useEffect(() => {
         connectToServer();
         return () => {
             socketRef.current.disconnect();
@@ -75,8 +168,8 @@ function App() {
         if (msg !== "") {
             setMessages((prevMessages) => [...prevMessages, msg]);
         } else if (newMessage.trim() !== "") {
-                socketRef.current.emit("message", newMessage);
-                setNewMessage("");
+            socketRef.current.emit("message", newMessage);
+            setNewMessage("");
         }
     };
 
@@ -117,6 +210,25 @@ function App() {
         // }
     };
 
+    const handleRefresh = () => {
+        setIsRefreshing(true);
+        // setRefreshing(true);
+        // setTimeout(() => {
+        //     setServerStatus("refreshing...");
+        //     setRefreshing(false);
+        // }, 2000);
+    };
+
+        const handleUsernameEdit = () => {
+        setEditingUsername(true);
+        setEditedUsername(username);
+    };
+
+    const handleUsernameSave = () => {
+        setUsername(editedUsername);
+        setEditingUsername(false);
+    };
+
     function setWifiHeader(wifi) {
         var wifiHeader = document.getElementById("wifi-header");
         wifiHeader.textContent = "Global: " + wifi;
@@ -133,7 +245,7 @@ function App() {
     };
 
     return (
-        <div>
+        <div style={{ backgroundColor: "#6d6dd4" }}>
             <div
                 className="App-header"
                 style={{
@@ -145,9 +257,9 @@ function App() {
                     height: "70px",
                 }}
             >
-                <div class="line">
+                <div class="line" style={{ alignItems: "center" }}>
                     <input
-                        style={{ width: "50px", height: "50px", padding: "10px", marginTop: "15px", paddingRight: "15px" }}
+                        style={{ width: "50px", height: "50px", padding: "10px", paddingRight: "15px" }}
                         type="image"
                         alt="sidebar icon"
                         src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
@@ -182,11 +294,26 @@ function App() {
                     </h1>
 
                 </div>
-                <div class="line" style={{justifyContent: "flex-end"}}>
-                    <div class="line">
-                        <h2 style={{ paddingRight: "15px" }}>Chatting as: </h2>
+                <div class="line" style={{justifyContent: "flex-end", alignItems: "center" }}>
+                    <div class="line" style={{ alignItems: "center" }}>
+                        {editingUsername ? (
+                            <>
+                                <input type="text" value={editedUsername} onChange={(e) => setEditedUsername(e.target.value)} />
+                                <button onClick={handleUsernameSave}>Save</button>
+                            </>
+                        ) : (
+                                <h2 style={{ paddingRight: "15px", marginLeft: "-40px" }}>Chatting as: {username}</h2>
+
+                            )}
+                        <input 
+                            style={{ width: "20px", height: "20px" }}
+                            type="image"
+                            alt="edit icon"
+                            src="/edit-icon.png"
+                            onClick={handleUsernameEdit}
+                        />
                     </div>
-                    <img style={{ width: "50px", height: "50px", padding: "0px", marginTop: "25px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
+                    <img style={{ width: "50px", height: "50px", padding: "0px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
                 </div>
             </div>
 
@@ -239,11 +366,36 @@ function App() {
                     <div className="page">
                         <div class="line" style={{ width: "90vw", height: "40px", alignItems: "center" }}>
                             <div class="line">
-                                <h3>Active Users:</h3>
+                                <h3>Users Online: <span style={{ color: "green" }}>{userCount}</span></h3>
                             </div>
-                            <div class="line" />
                             <div class="line">
-                                <h3>Server Status: {serverStatus}</h3>
+                            {/* loading animation */}
+                            </div>
+                            <div class="line" style={{ alignItems: "center" }}>
+                                <h3>Server Status: {serverStatus}
+                                </h3>
+                                <Container>
+                                    <RefreshButton onClick={handleRefresh}>
+                                        <RefreshIcon
+                                            sx={{ color: brandColorPrimary }}
+                                            className={cx({
+                                                "refresh--icon": true,
+                                                "refresh--icon__is-refreshing": isRefreshing
+                                            })}
+                                        />
+                                        <AnimatePresence>
+                                            {showSuccess && (
+                                                <SuccessIcon
+                                                    initial={{ opacity: 0, y: 10, backgroundColor: "#ffffff00" }}
+                                                    animate={{ pacity: 1, y: 0, backgroundColor: "#fff" }}
+                                                    exit={{ opacity: 0, y: -10, backgroundColor: "#ffffff00" }}
+                                                >
+                                                    <CheckIcon color="success" />
+                                                </SuccessIcon>
+                                            )}
+                                        </AnimatePresence>
+                                    </RefreshButton>
+                                </Container>
                             </div>
                         </div>
                         <ul className="messages">
