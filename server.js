@@ -11,7 +11,7 @@ var userNumber = 0;
 var activeUsers = []; //identifies users by numbers for now until we have a proper database.
 
 const firebase = require('firebase-admin');
-const serviceAccount = require('../../novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
+const serviceAccount = require('private/novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
 firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),
     databaseURL: 'https://novachat-b6eea.web.app'
