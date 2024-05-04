@@ -73,7 +73,7 @@ function App() {
                 sendServerMessage(msg);
             });
             socketRef.current.on("wifi", (wifi) => {
-                setWifiHeader(wifi);
+                //setWifiHeader(wifi);
                 roomUpdate(wifi);
             });
             socketRef.current.on("server status", (status) => {
@@ -158,18 +158,6 @@ function App() {
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
         if (e.key === "Enter") sendChatMessage();
-        const container = containerRef.current;
-        if (!container) return;
-
-        // NOTE: TEMP REMOVED SCROLLING
-        // const pageWidth = container.clientWidth;
-        // const scrollAmount = pageWidth;
-        // if (e.key === "j") {
-        //     // use `ArrowLeft` instead of `j` and `ArrowRight` instead of `k` eventually
-        //     container.scrollLeft -= scrollAmount;
-        // } else if (e.key === "k") {
-        //     container.scrollLeft += scrollAmount;
-        // }
     };
 
     const handleRefresh = () => {
@@ -184,14 +172,6 @@ function App() {
     const handleUsernameSave = () => {
         setUsername(editedUsername);
         setEditingUsername(false);
-    };
-
-    const renderMessage = (msg, index) => {
-        return (
-            <li key={index} className={msg.startsWith("SERVER") ? "server-message" : ""}>
-                {msg}
-            </li>
-        );
     };
 
     return (
