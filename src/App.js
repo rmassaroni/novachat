@@ -272,7 +272,6 @@ function App() {
                     <img style={{ width: "50px", height: "50px", padding: "0px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
                 </div>
             </div>
-
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <Sidebar myChannels={myChannels} roomUpdate={roomUpdate} sidebar={sidebar} setSideBar={setSidebar} />
                 <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
@@ -283,8 +282,7 @@ function App() {
                             showSuccess={showSuccess} 
                             setShowSuccess={setShowSuccess} 
                             handleRefresh={handleRefresh} 
-                            isRefreshing={isRefreshing}
-                        />}
+                            isRefreshing={isRefreshing} />}
                         serverStatus={serverStatus} 
                         userCount={userCount} 
                         messages={messages} 
