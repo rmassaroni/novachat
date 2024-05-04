@@ -86,8 +86,8 @@ function App() {
         try {
             console.log("Connecting to server...");
             await fetch(URL);
-            socketRef.current = io.connect("http://localhost:3000"); //use this for testing on local host. would need to redownload all the old modules.
-            //socketRef.current = io.connect(URL);
+            //socketRef.current = io.connect("http://localhost:3000"); //use this for testing on local host. would need to redownload all the old modules.
+            socketRef.current = io.connect(URL);
             socketRef.current.on("connect", () => {
                 console.log(connectionMessage);
                 var id = Math.floor(Math.random() * 9000) + 1000; // random four digit number

@@ -2,6 +2,10 @@ https://novachat-b6eea.web.app/
 
 https://35.236.242.246:8443/
 
+https://nova-chat.com/
+
+![Alt text](./public/novachat_screenshot.png)
+
 ![Alt text](./public/homepagescreenshot.png)
 
 ## Frontend Contributing Instructions
