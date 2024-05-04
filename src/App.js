@@ -218,23 +218,18 @@ function App() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     paddingRight: "10px",
-                    height: "70px",
-                }}
-            >
+                    height: "70px" }}>
                 <div class="line" style={{ alignItems: "center" }}>
                     <input
                         style={{ width: "50px", height: "50px", padding: "10px", paddingRight: "15px" }}
                         type="image"
                         alt="sidebar icon"
                         src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png"
-                        onClick={() => setSidebar(!sidebar)}
-                    />
-
+                        onClick={() => setSidebar(!sidebar)}/>
                     <div class="line">
                         <h2>Channel: Global</h2>
                     </div>
                 </div>
-
                 <div style={{ position: "relative", display: "inlineBlock"}}>
                     <img style={{ marginTop: "38px" }}src="/banner.png" alt="novachat banner" />
                     <h1 style={{
@@ -245,10 +240,7 @@ function App() {
                         padding: "1px",
                         fontSize: "3.6em",
                         marginTop: "6px"
-                    }}>
-                        novachat
-                    </h1>
-
+                    }}>novachat</h1>
                 </div>
                 <div class="line" style={{justifyContent: "flex-end", alignItems: "center" }}>
                     <div class="line" style={{ alignItems: "center" }}>
@@ -259,15 +251,13 @@ function App() {
                             </>
                         ) : (
                                 <h2 style={{ paddingRight: "10px", marginLeft: "-40px" }}>Chatting as: {username}</h2>
-
                             )}
                         <input 
                             style={{ width: "20px", height: "20px" }}
                             type="image"
                             alt="edit icon"
                             src="/edit-icon.png"
-                            onClick={handleUsernameEdit}
-                        />
+                            onClick={handleUsernameEdit} />
                     </div>
                     <img style={{ width: "50px", height: "50px", padding: "0px", borderRadius: "10px", border: "1px solid #ccc" }} src="/nova.jpg" alt="nova icon" />
                 </div>
