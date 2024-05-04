@@ -111,6 +111,7 @@
 .line {
     display: flex;
     width: 30vw;
+    align-items: center;
 }
 
 .divider {
