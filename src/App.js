@@ -234,14 +234,6 @@ function App() {
                     </div>
                 </div>
 
-                
-{/*
-                <div class="trapezoid" style={{
-                    fontSize: "50px",
-                }}>
-                    <h1 class="trapezoid-text">
-                    novachat</h1> </div>
-*/}
                 <div style={{ position: "relative", display: "inlineBlock"}}>
                     <img style={{ marginTop: "38px" }}src="/banner.png" alt="novachat banner" />
                     <h1 style={{
