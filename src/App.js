@@ -88,7 +88,6 @@ function App() {
         }
     };
 
-
     useEffect(() => {
         let refreshTimer;
         let successTimer;
@@ -122,11 +121,9 @@ function App() {
     }, []);
 
     const updatePage = () => {
-
     }
 
     const clearMessages = () => {
-
     }
 
     const send = (msg = "") => {
@@ -177,14 +174,9 @@ function App() {
 
     const handleRefresh = () => {
         setIsRefreshing(true);
-        // setRefreshing(true);
-        // setTimeout(() => {
-        //     setServerStatus("refreshing...");
-        //     setRefreshing(false);
-        // }, 2000);
     };
 
-        const handleUsernameEdit = () => {
+    const handleUsernameEdit = () => {
         setEditingUsername(true);
         setEditedUsername(username);
     };
@@ -193,13 +185,6 @@ function App() {
         setUsername(editedUsername);
         setEditingUsername(false);
     };
-
-    function setWifiHeader(wifi) {
-        var wifiHeader = document.getElementById("wifi-header");
-        wifiHeader.textContent = "Global: " + wifi;
-        //setMessages(prevMessages => [...prevMessages, 'Joined: '+wifi]);
-    }
-
 
     const renderMessage = (msg, index) => {
         return (
