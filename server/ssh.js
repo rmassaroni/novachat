@@ -6,8 +6,8 @@ const app = express();
 const cors = require('cors');
 const fs = require('fs');
 
-const privateKey = fs.readFileSync('server.key', 'utf8');
-const certificate = fs.readFileSync('server.cert', 'utf8');
+const privateKey = fs.readFileSync('private/server.key', 'utf8');
+const certificate = fs.readFileSync('private/server.cert', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 const firebase = require('firebase-admin');
