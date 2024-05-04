@@ -281,7 +281,20 @@ function App() {
                     tabIndex="0"
                     onKeyDown={handleKeyPress}
                 >
-                    <Page refreshComponent={<RefreshButton refreshing={refreshing} setRefreshing={setRefreshing} showSuccess={showSuccess} setShowSuccess={setShowSuccess} handleRefresh={handleRefresh} isRefreshing={isRefreshing}/>} serverStatus={serverStatus} userCount={userCount} messages={messages} newMessage={newMessage} setNewMessage={setNewMessage} />
+                    <Page
+                        refreshComponent={<RefreshButton 
+                            refreshing={refreshing} 
+                            setRefreshing={setRefreshing} 
+                            showSuccess={showSuccess} 
+                            setShowSuccess={setShowSuccess} 
+                            handleRefresh={handleRefresh} 
+                            isRefreshing={isRefreshing}
+                        />}
+                        serverStatus={serverStatus} 
+                        userCount={userCount} 
+                        messages={messages} 
+                        newMessage={newMessage} 
+                        setNewMessage={setNewMessage} />
                 </div>
             </div>
         </div>
