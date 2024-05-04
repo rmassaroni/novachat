@@ -1,25 +1,14 @@
 const express = require('express');
-//const { createServer } = require('node:http');
-//const http = require('http');
 const https = require('https');
 const { join } = require('node:path')
-//const { join } = require('path');
 const { Server } = require('socket.io');
 const app = express();
-//const server = http.createServer(app);
-//const io = new Server(server);
 const cors = require('cors');
 const fs = require('fs');
-
-//const privateKey = fs.readFileSync('~/server.key', 'utf8');
-//const certificate = fs.readFileSync('~/server.crt', 'utf8');
-//const ca = fs.readFileSync('/path/to/ca_bundle.crt', 'utf8');
 
 const privateKey = fs.readFileSync('server.key', 'utf8');
 const certificate = fs.readFileSync('server.cert', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
-//const server = https.createServer(credentials, app);
-//const io = new Server(server);
 
 const firebase = require('firebase-admin');
 //const serviceAccount = require('./novachat-b6eea-firebase-adminsdk-2rbye-eb98c2d26a.json');
@@ -33,30 +22,17 @@ const firebase = require('firebase-admin');
 //    console.log('Service account key required successfully.');
 //}
 
-//const credentials = {
-//    key: privateKey,
-//    cert: certificate,
-//    ca: ca
-//};
-
-
-//app.use(cors({
-//    //origin: ['https://novachat-b6eea.web.app/', 'https://novachat-b6eea.firebaseapp.com/', 'https://nova-chat.com/']
-//	origin: '*'
-//}));
-//app.use(cors());
 app.use(cors({
-    origin: 'https://nova-chat.com'
+	origin: ['https://novachat-b6eea.web.app/', 'https://nova-chat.com']
+	//origin: 'https://novachat-b6eea.web.app'
+	//origin: 'https://nova-chat.com'
 }));
 app.use(function(req, res, next) {
-	//res.setHeader('Access-Control-Allow-Origin', 'https://nova-chat.com');
-	//res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-	//res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-	//res.header('Access-Control-Allow-Origin', req.headers.origin);
-	res.header('Access-Control-Allow-Origin', 'https://nova-chat.com');
+	//res.header('Access-Control-Allow-Origin', 'https://nova-chat.com');
+	//res.header('Access-Control-Allow-Origin', ['https://novachat-b6eea.web.app', 'https://nova-chat.com']);
+	res.header('Access-Control-Allow-Origin', 'https://novachat-b6eea.web.app');
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-res.header('Access-Control-Allow-Origin', 'https://nova-chat.com');
 
 	next();
 });
@@ -66,10 +42,11 @@ const PORT = 8443;
 const httpsServer = https.createServer(credentials, app).listen(PORT, '0.0.0.0', () => {
     console.log('Server running on port '+PORT);
 });
-//const httpsIO = new Server(httpsServer);
 const httpsIO = require("socket.io")(httpsServer, {
   cors: {
-    origin: "https://nova-chat.com",
+    //origin: "https://nova-chat.com",
+	  origin: ["https://novachat-b6eea.web.app", "https://nova-chat.com"],
+	//origin: 'https://novachat-b6eea.web.app',
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true
@@ -101,7 +78,9 @@ httpsIO.on('connection', (socket) => {
     };
     newChannel(wifiname);
 
+	
     socket.on('message', (msg) => {
+	    console.log(msg);
         httpsIO.emit('message', msg);
     });
     socket.on('server message', (msg) => {
@@ -119,11 +98,8 @@ httpsIO.on('connection', (socket) => {
         activeUsers = [...activeUsers.slice(0, activeUsers.indexOf(socket.id)), ...activeUsers.slice(activeUsers.indexOf(socket.id) + 1)];
     });
 
-    socket.emit('user number', socket.id);
-    socket.emit('server message', wifiname);
-    //socket.emit('server message', "server message test");
-    socket.emit('wifi', wifiname);
-    console.log('channels: ', channels);
+    socket.emit('socket id', socket.id);
+	socket.emit('user count', activeUsers.length);
     console.log('active users: ',activeUsers);
     socket.emit('server message', userNumber+" active user(s)");
     socket.emit('join room', "dev_room");
