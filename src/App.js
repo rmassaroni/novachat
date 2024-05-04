@@ -1,56 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import CheckIcon from "@mui/icons-material/Check";
-import cx from "classnames";
-import { motion, AnimatePresence } from "framer-motion";
-import styled, { keyframes } from "styled-components";
 import io from "socket.io-client";
 import Sidebar from "./Sidebar";
 import RefreshButton from "./RefreshButton";
-
-// const rotate = keyframes`
-// from {
-// transform: rotate(0deg);
-// }
-//
-// to {
-// transform: rotate(360deg);
-// }
-// `;
-// const Container = styled.div`
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// padding: 16px;
-// box-sizing: border-box;
-// `;
-//
-// const brandColorPrimary = "#5b13df";
-// const RefreshButton = styled.button`
-// width: 2rem;
-// height: 2rem;
-// padding: 0;
-// margin: 0;
-// display: flex;
-// align-items: center;
-// justify-content: center;
-// position: relative;
-// cursor: pointer;
-// border-radius: 100%;
-// border: 0;
-// background: #fff;
-// outline-color: ${brandColorPrimary};
-// .refresh--icon.refresh--icon__is-refreshing {
-// animation: ${rotate} 1s infinite;
-// animation-timing-function: cubic-bezier(0.42, 0.2, 0.58, 1);
-// }
-// `;
-//
-// const SuccessIcon = styled(motion.div)`
-// position: absolute;
-// `;
-
 
 function App() {
     const CONNECTED = false;
