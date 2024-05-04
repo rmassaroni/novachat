@@ -24,6 +24,8 @@ function App() {
     const [refreshing, setRefreshing] = useState(false);
     const [editingUsername, setEditingUsername] = useState(false);
     const [editedUsername, setEditedUsername] = useState("");
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     const roomUpdate = (newRoom) => { setMyChannels((prevChannels) => [...prevChannels, newRoom]); };
     var username1 = "user";
@@ -31,67 +33,9 @@ function App() {
     const [myChannels, setMyChannels] = useState(["Global"]);
     var currentUsername;
 
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [isRefreshing, setIsRefreshing] = useState(false);
-
-
     const IP = '35.236.242.246';
     const PORT = '8443';
     const URL = "https://"+IP+":"+PORT+"/";
-
-
-    useEffect(() => {
-        let refreshTimer;
-        let successTimer;
-        if (isRefreshing) {
-
-            if(serverStatus == connectionMessage) socketRef.current.disconnect();
-            setServerStatus("refeshing...");
-            connectToServer(setUsername,
-                setServerStatus,
-                setIsRefreshing,
-                setShowSuccess,
-                setMessages,
-                setMyChannels,
-                setUserCount,
-                socketRef, connectionMessage, username1, usernames, currentUsername, roomUpdate, send, sendServerMessage, URL
-            );
-            //connectToServer()
-            refreshTimer = setTimeout(() => {
-                setIsRefreshing(false);
-                setShowSuccess(true);
-            }, 3000);
-        }
-        if (showSuccess) {
-            successTimer = setTimeout(() => {
-                setShowSuccess(false);
-            }, 1500);
-        }
-        return () => {
-            clearTimeout(refreshTimer);
-            clearTimeout(successTimer);
-        };
-    }, [isRefreshing, showSuccess]);
-
-    useEffect(() => {
-        connectToServer(
-            setUsername,
-            setServerStatus,
-            setIsRefreshing,
-            setShowSuccess,
-            setMessages,
-            setMyChannels,
-            setUserCount,
-            socketRef, connectionMessage, username1, usernames, currentUsername, roomUpdate, send, sendServerMessage, URL
-        );
-        return () => {
-            //socketRef.current.disconnect();
-        };
-    }, []);
-
-    const updatePage = () => {}
-
-    const clearMessages = () => {}
 
     const send = (msg = "") => {
         if (msg !== "") {
@@ -116,6 +60,66 @@ function App() {
         const formattedMsg = <p className="server-message">{msg}</p>;
         setMessages((prevMessages) => [...prevMessages, formattedMsg]);
     };
+
+    const socketParameters = {
+        setUsername,
+        setServerStatus,
+        setIsRefreshing,
+        setShowSuccess,
+        setMessages,
+        setMyChannels,
+        setUserCount,
+        socketRef,
+        connectionMessage,
+        username1,
+        usernames,
+        currentUsername,
+        roomUpdate,
+        send,
+        sendServerMessage,
+        URL
+    };
+
+
+    useEffect(() => {
+        let refreshTimer;
+        let successTimer;
+        if (isRefreshing) {
+
+            if(serverStatus == connectionMessage) socketRef.current.disconnect();
+            setServerStatus("refeshing...");
+            connectToServer(socketParameters);
+            //connectToServer()
+            refreshTimer = setTimeout(() => {
+                setIsRefreshing(false);
+                setShowSuccess(true);
+            }, 3000);
+        }
+        if (showSuccess) {
+            successTimer = setTimeout(() => {
+                setShowSuccess(false);
+            }, 1500);
+        }
+        return () => {
+            clearTimeout(refreshTimer);
+            clearTimeout(successTimer);
+        };
+    }, [isRefreshing, showSuccess]);
+
+    useEffect(() => {
+        connectToServer(socketParameters);
+        return () => {
+            //socketRef.current.disconnect();
+        };
+    }, []);
+
+    const updatePage = () => {}
+
+    const clearMessages = () => {}
+
+
+
+
 
     const containerRef = useRef(null);
     const handleKeyPress = (e) => {
