@@ -379,33 +379,36 @@ function App() {
                                 <h3>Users Online: <span style={{ color: "green" }}>{userCount}</span></h3>
                             </div>
                             <div class="line">
-                            {/* loading animation */}
+                            {/* loading animation under header */}
                             </div>
                             <div class="line" style={{ alignItems: "center" }}>
-                                <h3>Server Status: {serverStatus}
+                                <h3 style={{width: "15vw"}}>Server Status: {serverStatus}
                                 </h3>
-                                <Container>
-                                    <RefreshButton onClick={handleRefresh}>
-                                        <RefreshIcon
-                                            sx={{ color: brandColorPrimary }}
-                                            className={cx({
-                                                "refresh--icon": true,
-                                                "refresh--icon__is-refreshing": isRefreshing
-                                            })}
-                                        />
-                                        <AnimatePresence>
-                                            {showSuccess && (
-                                                <SuccessIcon
-                                                    initial={{ opacity: 0, y: 10, backgroundColor: "#ffffff00" }}
-                                                    animate={{ pacity: 1, y: 0, backgroundColor: "#fff" }}
-                                                    exit={{ opacity: 0, y: -10, backgroundColor: "#ffffff00" }}
-                                                >
-                                                    <CheckIcon color="success" />
-                                                </SuccessIcon>
-                                            )}
-                                        </AnimatePresence>
-                                    </RefreshButton>
-                                </Container>
+                                <div style={{ textAlign: "center" }}>
+                                    <Container>
+                                        <RefreshButton onClick={handleRefresh}>
+                                            <RefreshIcon
+                                                sx={{ color: brandColorPrimary }}
+                                                className={cx({
+                                                    "refresh--icon": true,
+                                                    "refresh--icon__is-refreshing": isRefreshing
+                                                })}
+                                            />
+                                            <AnimatePresence>
+                                                {showSuccess && (
+                                                    <SuccessIcon
+                                                        initial={{ opacity: 0, y: 10, backgroundColor: "#ffffff00" }}
+                                                        animate={{ pacity: 1, y: 0, backgroundColor: "#fff" }}
+                                                        exit={{ opacity: 0, y: -10, backgroundColor: "#ffffff00" }}
+                                                    >
+                                                        <CheckIcon color="success" />
+                                                    </SuccessIcon>
+                                                )}
+                                            </AnimatePresence>
+                                        </RefreshButton>
+                                    </Container>
+                                </div>
+                                <h3>sID: </h3>
                             </div>
                         </div>
                         <ul className="messages">
