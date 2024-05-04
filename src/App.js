@@ -211,7 +211,15 @@ function App() {
 
     return (
         <div style={{ backgroundColor: "#6d6dd4" }}>
-            <AppHeader sidebar={sidebar} setSidebar={setSidebar} editingUsername={editingUsername} editedUsername={editedUsername} setEditedUsername={setEditedUsername} handleUsernameSave={handleUsernameSave} username={username} handleUsernameEdit={handleUsernameEdit} />
+            <AppHeader 
+                sidebar={sidebar} 
+                setSidebar={setSidebar} 
+                editingUsername={editingUsername} 
+                editedUsername={editedUsername} 
+                setEditedUsername={setEditedUsername} 
+                handleUsernameSave={handleUsernameSave} 
+                username={username} 
+                handleUsernameEdit={handleUsernameEdit} />
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <Sidebar myChannels={myChannels} roomUpdate={roomUpdate} sidebar={sidebar} setSideBar={setSidebar} />
                 <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
