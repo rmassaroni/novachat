@@ -6,7 +6,8 @@ import cx from "classnames";
 import { motion, AnimatePresence } from "framer-motion";
 import styled, { keyframes } from "styled-components";
 import io from "socket.io-client";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+//import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import Sidebar from "./Sidebar";
 
 const rotate = keyframes`
 from {
@@ -328,45 +329,7 @@ function App() {
             </div>
 
             <div style={{ display: "flex", flexDirection: "row" }}>
-                <Sidebar collapsed={sidebar} collapsedWidth="0px">
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <h3 style={{ paddingLeft: 10 }}>Channels</h3>
-                        <input
-                            style={{ width: "25px", height: "25px", padding: "20px" }}
-                            type="image"
-                            alt="add channel icon"
-                            src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
-                            onClick={() => {
-                                const c = prompt("Enter channel name to join/create:");
-                                if (c !== null && c.trim() !== "") roomUpdate(c);
-                            }}
-                        />
-                    </div>
-                    <Menu>
-                        {
-                            myChannels.map((channel) => (
-                                <MenuItem
-                                    component={
-                                        <p
-                                            onClick={() => {
-                                                console.log("Joining channel: " + channel);
-                                            }}
-                                        />
-                                    }
-                                >
-                                    {channel}
-                                </MenuItem>
-                            )) // List all the channels
-                        }
-                    </Menu>
-                </Sidebar>
-
+                <Sidebar myChannels={myChannels} roomUpdate={roomUpdate} sidebar={sidebar} setSideBar={setSidebar} />
                 <div
                     className="container"
                     ref={containerRef}
