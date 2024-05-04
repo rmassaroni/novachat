@@ -275,12 +275,7 @@ function App() {
 
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <Sidebar myChannels={myChannels} roomUpdate={roomUpdate} sidebar={sidebar} setSideBar={setSidebar} />
-                <div
-                    className="container"
-                    ref={containerRef}
-                    tabIndex="0"
-                    onKeyDown={handleKeyPress}
-                >
+                <div className="container" ref={containerRef} tabIndex="0" onKeyDown={handleKeyPress}>
                     <Page
                         refreshComponent={<RefreshButton 
                             refreshing={refreshing} 
