@@ -3,6 +3,7 @@ import "./App.css";
 import io from "socket.io-client";
 import Sidebar from "./Sidebar";
 import RefreshButton from "./RefreshButton";
+import Page from "./Page";
 
 function App() {
     const CONNECTED = false;
@@ -280,39 +281,7 @@ function App() {
                     tabIndex="0"
                     onKeyDown={handleKeyPress}
                 >
-                    <div className="page">
-                        <div class="line" style={{ width: "90vw", height: "40px", alignItems: "center" }}>
-                            <div class="line">
-                                <h3>Users Online: <span style={{ color: "green" }}>{userCount}</span></h3>
-                            </div>
-                            <div class="line">
-                            {/* loading animation under header */}
-                            </div>
-                            <div class="line" style={{ alignItems: "center" }}>
-                                <h3 style={{width: "16vw"}}>Server Status: {serverStatus}
-                                </h3>
-                                <div style={{ textAlign: "center" }}>
-                                    <RefreshButton refreshing={refreshing} setRefreshing={setRefreshing} showSuccess={showSuccess} setShowSuccess={setShowSuccess} handleRefresh={handleRefresh} isRefreshing={isRefreshing}  />
-                                </div>
-                                <h3>sID: </h3>
-                            </div>
-                        </div>
-                        <ul className="messages">
-                            {messages.map((msg, index) => (
-                                <li key={index}>{msg}</li> // Render each message in the list
-                            ))}
-                        </ul>
-                        {/*<button onClick={handleSendMessage}>Send</button> {/* Add a button to send the message */}
-                        <div class="form" action="">
-                            <input
-                                class="input"
-                                autocomplete="off"
-                                value={newMessage}
-                                onChange={(e) => setNewMessage(e.target.value)}
-                                placeholder="Message"
-                            />
-                        </div>
-                    </div>
+                    <Page refreshComponent={<RefreshButton refreshing={refreshing} setRefreshing={setRefreshing} showSuccess={showSuccess} setShowSuccess={setShowSuccess} handleRefresh={handleRefresh} isRefreshing={isRefreshing}/>} serverStatus={serverStatus} userCount={userCount} messages={messages} newMessage={newMessage} setNewMessage={setNewMessage} />
                 </div>
             </div>
         </div>
