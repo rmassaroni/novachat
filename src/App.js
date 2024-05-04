@@ -382,7 +382,7 @@ function App() {
                             {/* loading animation under header */}
                             </div>
                             <div class="line" style={{ alignItems: "center" }}>
-                                <h3 style={{width: "15vw"}}>Server Status: {serverStatus}
+                                <h3 style={{width: "16vw"}}>Server Status: {serverStatus}
                                 </h3>
                                 <div style={{ textAlign: "center" }}>
                                     <Container>
