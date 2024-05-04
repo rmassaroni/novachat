@@ -139,14 +139,9 @@ function App() {
         if (newMessage.trim() !== "") {
             socketRef.current.emit("message", username + ": " + newMessage);
             const formattedMsg = <p className="messages"><strong>{username}:</strong> {newMessage.trim()}</p>
-
             setMessages((prevMessages) => [...prevMessages, formattedMsg]);
             setNewMessage("");
         }
-        // } else {
-        //     socketRef.current.emit("message", username + ": empty message");
-        //     setNewMessage("");
-        // }
     };
 
     const sendServerMessage = (msg) => {
