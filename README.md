@@ -23,6 +23,7 @@ https://nova-chat.com/
   - add 'chatting as: ' somewhere
   - add our github links somewhere
   - dark mode
+  - size adaptation
 
 ## Backend Contributing Instructions
 
