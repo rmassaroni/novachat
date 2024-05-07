@@ -24,6 +24,7 @@ https://nova-chat.com/
   - add our github links somewhere
   - dark mode
   - size adaptation
+  - 
 
 ## Backend Contributing Instructions
 
