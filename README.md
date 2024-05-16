@@ -24,6 +24,7 @@ https://nova-chat.com/
   - add our github links somewhere
   - dark mode
   - size adaptation
+  - element swipe animation. the channel header should swipe as the page swipes.
 
 ## Backend Contributing Instructions
 
