@@ -1,7 +1,7 @@
     import io from "socket.io-client";
 
 
-const connectToServer = async (setUsername, setServerStatus, setIsRefreshing, setShowSuccess, setMessages, setMyChannels, setUserCount, socketRef, connectionMessage, username1, usernames, currentUsername, roomUpdate, send, sendServerMessage, URL) => {
+const connectToServer = async (setUsername, setServerStatus, isRefreshing, setIsRefreshing, setShowSuccess, setMessages, setMyChannels, setUserCount, socketRef, connectionMessage, username1, usernames, currentUsername, roomUpdate, send, sendServerMessage, URL) => {
     try {
         console.log("Connecting to server...");
         await fetch(URL);

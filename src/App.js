@@ -61,23 +61,28 @@ function App() {
         setMessages((prevMessages) => [...prevMessages, formattedMsg]);
     };
 
-    const socketParameters = {
-        setUsername,
-        setServerStatus,
-        setIsRefreshing,
-        setShowSuccess,
-        setMessages,
-        setMyChannels,
-        setUserCount,
-        socketRef,
-        connectionMessage,
-        username1,
-        usernames,
-        currentUsername,
-        roomUpdate,
-        send,
-        sendServerMessage,
-        URL
+    const socketParameters = async () => {
+        
+        const params = {
+            setUsername,
+            setServerStatus,
+            isRefreshing,
+            setIsRefreshing,
+            setShowSuccess,
+            setMessages,
+            setMyChannels,
+            setUserCount,
+            socketRef,
+            connectionMessage,
+            username1,
+            usernames,
+            currentUsername,
+            roomUpdate,
+            send,
+            sendServerMessage,
+            URL
+        }
+        return params;
     };
 
 
@@ -85,11 +90,9 @@ function App() {
         let refreshTimer;
         let successTimer;
         if (isRefreshing) {
-
             if(serverStatus == connectionMessage) socketRef.current.disconnect();
             setServerStatus("refeshing...");
             connectToServer(socketParameters);
-            //connectToServer()
             refreshTimer = setTimeout(() => {
                 setIsRefreshing(false);
                 setShowSuccess(true);
@@ -104,14 +107,30 @@ function App() {
             clearTimeout(refreshTimer);
             clearTimeout(successTimer);
         };
-    }, [isRefreshing, showSuccess]);
+    }, [isRefreshing, showSuccess, setIsRefreshing]);
 
     useEffect(() => {
-        connectToServer(socketParameters);
+        connectToServer(            setUsername,
+            setServerStatus,
+            isRefreshing,
+            setIsRefreshing,
+            setShowSuccess,
+            setMessages,
+            setMyChannels,
+            setUserCount,
+            socketRef,
+            connectionMessage,
+            username1,
+            usernames,
+            currentUsername,
+            roomUpdate,
+            send,
+            sendServerMessage,
+            URL);
         return () => {
             //socketRef.current.disconnect();
         };
-    }, []);
+    }, [setIsRefreshing]);
 
     const updatePage = () => {}
 
