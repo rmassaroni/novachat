@@ -92,7 +92,25 @@ function App() {
         if (isRefreshing) {
             if(serverStatus == connectionMessage) socketRef.current.disconnect();
             setServerStatus("refeshing...");
-            connectToServer(socketParameters);
+            //connectToServer(socketParameters);
+            connectToServer(            
+                setUsername,
+                setServerStatus,
+                isRefreshing,
+                setIsRefreshing,
+                setShowSuccess,
+                setMessages,
+                setMyChannels,
+                setUserCount,
+                socketRef,
+                connectionMessage,
+                username1,
+                usernames,
+                currentUsername,
+                roomUpdate,
+                send,
+                sendServerMessage,
+                URL);
             refreshTimer = setTimeout(() => {
                 setIsRefreshing(false);
                 setShowSuccess(true);
@@ -110,7 +128,8 @@ function App() {
     }, [isRefreshing, showSuccess, setIsRefreshing]);
 
     useEffect(() => {
-        connectToServer(            setUsername,
+        connectToServer(            
+            setUsername,
             setServerStatus,
             isRefreshing,
             setIsRefreshing,
